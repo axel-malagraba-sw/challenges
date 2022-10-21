@@ -9,9 +9,9 @@ public class Army<RACE extends Enum<RACE> & Race> {
     private final Map<RACE, Integer> troopsByRace;
 
     @SuppressWarnings("unchecked")
-    private Army(int initialSize, RACE race) {
+    private Army(int troopSize, RACE race) {
         troopsByRace = new EnumMap<>((Class<RACE>) race.getClass());
-        addTroopSize(initialSize, race);
+        addTroopSize(troopSize, race);
     }
 
     public Army<RACE> and(int troopSize, RACE race) {
