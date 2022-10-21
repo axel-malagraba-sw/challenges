@@ -37,7 +37,7 @@ public class Army<RACE extends Enum<RACE> & Race> {
         return troopsByRace.getOrDefault(race, 0);
     }
 
-    public static <RACE extends Enum<RACE> & Race> Army<RACE> of(int initialSize, RACE race) {
-        return new Army<>(initialSize, race);
+    public static <RACE extends Enum<RACE> & Race> Army<RACE> of(int troopSize, RACE race) {
+        return new Army<>(troopSize, race);
     }
 }
