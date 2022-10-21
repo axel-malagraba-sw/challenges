@@ -30,7 +30,7 @@ public class Army<RACE extends Enum<RACE> & Race> {
     }
 
     private long getTroopStrength(RACE race) {
-        return (long) race.strength() * getTroopSize(race);
+        return (long) race.getStrength() * getTroopSize(race);
     }
 
     private int getTroopSize(RACE race) {

@@ -1,5 +1,10 @@
 package com.smallworldfs.middleearth.race;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum SauronAdversary implements Race {
 
     HARFOOTS(1),
@@ -9,13 +14,4 @@ public enum SauronAdversary implements Race {
     ELVES(5);
 
     private final int strength;
-
-    SauronAdversary(int strength) {
-        this.strength = strength;
-    }
-
-    @Override
-    public int strength() {
-        return strength;
-    }
 }
