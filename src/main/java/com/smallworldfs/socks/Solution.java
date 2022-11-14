@@ -22,8 +22,8 @@ public class Solution {
         public SocksLaundromat(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
             this.socksByColor = new HashMap<>(MAX_COLORS);
             this.washingCapacity = washingCapacity;
-            addSocks(cleanSocks, SockHolder::clean);
-            addSocks(dirtySocks, SockHolder::dirty);
+            addSocks(cleanSocks, SockHolder::addClean);
+            addSocks(dirtySocks, SockHolder::addDirty);
         }
 
         private void addSocks(int[] socks, Consumer<SockHolder> classifier) {
@@ -65,11 +65,11 @@ public class Solution {
         private int dirty;
         private int clean;
 
-        public void dirty() {
+        public void addDirty() {
             dirty++;
         }
 
-        public void clean() {
+        public void addClean() {
             clean++;
         }
 
