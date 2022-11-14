@@ -1,29 +1,25 @@
 package com.smallworldfs.socks;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Solution {
 
     public int solution(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
-        return new Laundromat(washingCapacity, cleanSocks, dirtySocks)
-                .washDirtySocks()
-                .countCleanPairs();
+        return new SocksLaundromat(washingCapacity, cleanSocks, dirtySocks).wash().countCleanPairs();
     }
 
-    static class Laundromat {
+    static class SocksLaundromat {
 
         private static final int MAX_COLORS = 50;
 
         private final Map<Integer, SockHolder> socksByColor;
         private int washingCapacity;
 
-        public Laundromat(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
+        public SocksLaundromat(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
             this.socksByColor = new HashMap<>(MAX_COLORS);
             this.washingCapacity = washingCapacity;
             addSocks(cleanSocks, SockHolder::clean);
@@ -38,28 +34,13 @@ public class Solution {
             return socksByColor.computeIfAbsent(color, k -> new SockHolder());
         }
 
-        public Laundromat washDirtySocks() {
-            List<SockHolder> socks = sortSocksByPriority();
-            socks.forEach(this::wash);
+        public SocksLaundromat wash() {
+            dirtySocks().filter(SockHolder::hasOddClean).forEach(this::wash);
 
             if (washingCapacity > 1) {
-                socks.forEach(this::wash);
+                dirtySocks().forEach(this::wash);
             }
             return this;
-        }
-
-        private List<SockHolder> sortSocksByPriority() {
-            return socksByColor.values()
-                    .stream()
-                    .sorted(Comparator.comparing(this::calculatePriority))
-                    .collect(Collectors.toList());
-        }
-
-        private int calculatePriority(SockHolder socks) {
-            if (socks.hasOddClean()) {
-                return socks.hasOddDirty() ? 0 : 1;
-            }
-            return 2;
         }
 
         private void wash(SockHolder socks) {
@@ -68,6 +49,10 @@ public class Solution {
                 return;
             }
             washingCapacity -= socks.washMaxPairs(washingCapacity);
+        }
+
+        private Stream<SockHolder> dirtySocks() {
+            return socksByColor.values().stream().filter(SockHolder::hasDirty);
         }
 
         public int countCleanPairs() {
@@ -92,12 +77,12 @@ public class Solution {
             return isOdd(clean);
         }
 
-        public boolean hasOddDirty() {
-            return isOdd(dirty);
+        public boolean hasDirty() {
+            return dirty > 0;
         }
 
         public int washOne() {
-            return wash(1);
+            return wash(Math.min(1, dirty));
         }
 
         public int washMaxPairs(int max) {
@@ -113,13 +98,10 @@ public class Solution {
         }
 
         private int wash(int amount) {
-            if (dirty >= amount) {
-                dirty -= amount;
-                clean += amount;
+            dirty -= amount;
+            clean += amount;
 
-                return amount;
-            }
-            return 0;
+            return amount;
         }
 
         private boolean isOdd(int number) {
