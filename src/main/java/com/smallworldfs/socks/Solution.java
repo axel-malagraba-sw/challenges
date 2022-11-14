@@ -11,12 +11,9 @@ import java.util.stream.Collectors;
 public class Solution {
 
     public int solution(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
-        Laundromat laundromat = new Laundromat(washingCapacity);
-        laundromat.addSocks(cleanSocks, SockHolder::clean);
-        laundromat.addSocks(dirtySocks, SockHolder::dirty);
-        laundromat.washDirtySocks();
-
-        return laundromat.countCleanPairs();
+        return new Laundromat(washingCapacity, cleanSocks, dirtySocks)
+                .washDirtySocks()
+                .countCleanPairs();
     }
 
     static class Laundromat {
@@ -26,12 +23,14 @@ public class Solution {
         private final Map<Integer, SockHolder> socksByColor;
         private int washingCapacity;
 
-        public Laundromat(int washingCapacity) {
+        public Laundromat(int washingCapacity, int[] cleanSocks, int[] dirtySocks) {
             this.socksByColor = new HashMap<>(MAX_COLORS);
             this.washingCapacity = washingCapacity;
+            addSocks(cleanSocks, SockHolder::clean);
+            addSocks(dirtySocks, SockHolder::dirty);
         }
 
-        public void addSocks(int[] socks, Consumer<SockHolder> classifier) {
+        private void addSocks(int[] socks, Consumer<SockHolder> classifier) {
             Arrays.stream(socks).mapToObj(this::getOrCreateSockHolder).forEach(classifier);
         }
 
@@ -39,13 +38,14 @@ public class Solution {
             return socksByColor.computeIfAbsent(color, k -> new SockHolder());
         }
 
-        public void washDirtySocks() {
+        public Laundromat washDirtySocks() {
             List<SockHolder> socks = sortSocksByPriority();
             socks.forEach(this::wash);
 
             if (washingCapacity > 1) {
                 socks.forEach(this::wash);
             }
+            return this;
         }
 
         private List<SockHolder> sortSocksByPriority() {
