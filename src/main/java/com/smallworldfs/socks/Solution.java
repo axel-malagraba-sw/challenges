@@ -35,10 +35,10 @@ public class Solution {
         }
 
         public SocksLaundromat wash() {
-            dirtySocks().filter(SockHolder::hasOddClean).forEach(this::wash);
+            holdersWithDirtySocks().filter(SockHolder::hasOddClean).forEach(this::wash);
 
             if (washingCapacity > 1) {
-                dirtySocks().forEach(this::wash);
+                holdersWithDirtySocks().forEach(this::wash);
             }
             return this;
         }
@@ -51,7 +51,7 @@ public class Solution {
             washingCapacity -= socks.washMaxPairs(washingCapacity);
         }
 
-        private Stream<SockHolder> dirtySocks() {
+        private Stream<SockHolder> holdersWithDirtySocks() {
             return socksByColor.values().stream().filter(SockHolder::hasDirty);
         }
 
