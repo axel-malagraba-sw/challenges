@@ -35,20 +35,26 @@ public class Solution {
         }
 
         public SocksLaundromat wash() {
-            holdersWithDirtySocks().filter(SockHolder::hasOddClean).forEach(this::wash);
+            holdersWithDirtySocks().filter(SockHolder::hasOddClean).forEach(this::washOne);
 
             if (washingCapacity > 1) {
-                holdersWithDirtySocks().forEach(this::wash);
+                holdersWithDirtySocks().forEach(this::washMaxPairs);
             }
             return this;
         }
 
-        private void wash(SockHolder socks) {
-            if (socks.hasOddClean() && washingCapacity > 0) {
-                washingCapacity -= socks.washOne();
-                return;
+        private void washOne(SockHolder socks) {
+            if (washingCapacity > 0) {
+                deductWashingCapacity(socks.washOne());
             }
-            washingCapacity -= socks.washMaxPairs(washingCapacity);
+        }
+
+        private void washMaxPairs(SockHolder socks) {
+            deductWashingCapacity(socks.washMaxPairs(washingCapacity));
+        }
+
+        private void deductWashingCapacity(int washedSocks) {
+            washingCapacity -= washedSocks;
         }
 
         private Stream<SockHolder> holdersWithDirtySocks() {
@@ -82,7 +88,7 @@ public class Solution {
         }
 
         public int washOne() {
-            return wash(Math.min(1, dirty));
+            return wash(1);
         }
 
         public int washMaxPairs(int max) {
@@ -90,7 +96,7 @@ public class Solution {
         }
 
         public int getCleanPairs() {
-            return (int) Math.floor(clean / 2F);
+            return clean / 2;
         }
 
         private int getClosestEven(int number) {
