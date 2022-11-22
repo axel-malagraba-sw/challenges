@@ -1,7 +1,6 @@
 package com.smallworldfs.tennis;
 
 import com.smallworldfs.tennis.model.AdvantageState;
-import com.smallworldfs.tennis.model.BaseState;
 import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
 import com.smallworldfs.tennis.model.TieState;
@@ -18,7 +17,7 @@ public class TennisGameObjectOriented implements TennisGame {
     public TennisGameObjectOriented() {
         player1 = new Player("player1");
         player2 = new Player("player2");
-        baseState = new BaseState(player1, player2);
+        baseState = new GameState(player1, player2);
         specialStates = List.of(
                 new WinningState(player1, player2),
                 new AdvantageState(player1, player2),
