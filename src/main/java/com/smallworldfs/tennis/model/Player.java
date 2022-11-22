@@ -16,4 +16,8 @@ public class Player {
     public boolean hasName(String name) {
         return this.name.equals(name);
     }
+
+    public boolean hasSamePointsAs(Player player2) {
+        return player2.points == points;
+    }
 }

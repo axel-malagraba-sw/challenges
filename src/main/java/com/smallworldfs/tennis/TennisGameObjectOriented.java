@@ -1,6 +1,8 @@
 package com.smallworldfs.tennis;
 
+import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
+import com.smallworldfs.tennis.model.TieState;
 
 public class TennisGameObjectOriented implements TennisGame {
 
@@ -12,17 +14,8 @@ public class TennisGameObjectOriented implements TennisGame {
 
     public String getScore() {
         String score = "";
-        if (player1.getPoints() == player2.getPoints() && player1.getPoints() < 4) {
-            if (player1.getPoints() == 0)
-                score = "Love";
-            if (player1.getPoints() == 1)
-                score = "Fifteen";
-            if (player1.getPoints() == 2)
-                score = "Thirty";
-            score += "-All";
-        }
-        if (player1.getPoints() == player2.getPoints() && player1.getPoints() >= 3)
-            score = "Deuce";
+
+        score = getTieScore(score);
 
         if (player1.getPoints() > 0 && player2.getPoints() == 0) {
             if (player1.getPoints() == 1)
@@ -83,6 +76,15 @@ public class TennisGameObjectOriented implements TennisGame {
         }
         if (player2.getPoints() >= 4 && player1.getPoints() >= 0 && (player2.getPoints() - player1.getPoints()) >= 2) {
             score = "Win for player2";
+        }
+        return score;
+    }
+
+    private String getTieScore(String score) {
+        GameState state = new TieState(player1, player2);
+
+        if (state.isCurrentState()) {
+            return state.format();
         }
         return score;
     }
