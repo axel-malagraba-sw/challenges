@@ -6,46 +6,31 @@ import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
 import com.smallworldfs.tennis.model.TieState;
 import com.smallworldfs.tennis.model.WinningState;
+import java.util.List;
 
 public class TennisGameObjectOriented implements TennisGame {
 
-    private final Player player1 = new Player("player1");
-    private final Player player2 = new Player("player2");
+    private final Player player1;
+    private final Player player2;
+    private final List<GameState> specialStates;
+    private final GameState baseState;
+
+    public TennisGameObjectOriented() {
+        player1 = new Player("player1");
+        player2 = new Player("player2");
+        baseState = new BaseState(player1, player2);
+        specialStates = List.of(
+                new WinningState(player1, player2),
+                new AdvantageState(player1, player2),
+                new TieState(player1, player2));
+    }
 
     public String getScore() {
-        String score = "";
-
-        score = getTieScore(score);
-        score = getAdvantageScore(score);
-        score = getWinningScore(score);
-
-        if (score.isEmpty()) {
-            score = getBaseScore(score);
-        }
-        return score;
-    }
-
-    private String getBaseScore(String score) {
-        return checkState(score, new BaseState(player1, player2));
-    }
-
-    private String getAdvantageScore(String score) {
-        return checkState(score, new AdvantageState(player1, player2));
-    }
-
-    private String getWinningScore(String score) {
-        return checkState(score, new WinningState(player1, player2));
-    }
-
-    private String getTieScore(String score) {
-        return checkState(score, new TieState(player1, player2));
-    }
-
-    private String checkState(String score, GameState state) {
-        if (state.isCurrentState()) {
-            return state.format();
-        }
-        return score;
+        return specialStates.stream()
+                .filter(GameState::isCurrentState)
+                .findFirst()
+                .orElse(baseState)
+                .format();
     }
 
     public void wonPoint(String playerName) {
