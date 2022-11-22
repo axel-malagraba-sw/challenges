@@ -12,4 +12,8 @@ public class Player {
     public void wonPoint() {
         points++;
     }
+
+    public boolean hasName(String name) {
+        return this.name.equals(name);
+    }
 }

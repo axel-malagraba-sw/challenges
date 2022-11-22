@@ -87,30 +87,7 @@ public class TennisGameObjectOriented implements TennisGame {
         return score;
     }
 
-    public void SetP1Score(int number) {
-        for (int i = 0; i < number; i++) {
-            P1Score();
-        }
-    }
-
-    public void SetP2Score(int number) {
-        for (int i = 0; i < number; i++) {
-            P2Score();
-        }
-    }
-
-    public void P1Score() {
-        player1.wonPoint();
-    }
-
-    public void P2Score() {
-        player2.wonPoint();
-    }
-
-    public void wonPoint(String player) {
-        if (player == "player1")
-            P1Score();
-        else
-            P2Score();
+    public void wonPoint(String playerName) {
+        (player1.hasName(playerName) ? player1 : player2).wonPoint();
     }
 }
