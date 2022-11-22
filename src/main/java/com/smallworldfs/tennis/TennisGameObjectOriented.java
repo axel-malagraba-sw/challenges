@@ -17,6 +17,7 @@ public class TennisGameObjectOriented implements TennisGame {
             new AdvantageState(player1, player2),
             new TieState(player1, player2));
 
+    @Override
     public String getScore() {
         return specialStates.stream()
                 .filter(GameState::isCurrentState)
@@ -25,6 +26,7 @@ public class TennisGameObjectOriented implements TennisGame {
                 .format();
     }
 
+    @Override
     public void wonPoint(String playerName) {
         (player1.hasName(playerName) ? player1 : player2).wonPoint();
     }

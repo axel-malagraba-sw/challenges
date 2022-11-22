@@ -7,6 +7,7 @@ public class TennisGameScriptLike implements TennisGame {
 
     private final int[] points = new int[2];
 
+    @Override
     public String getScore() {
         if (points[0] == points[1]) {
             return getDrawScore();
@@ -28,6 +29,7 @@ public class TennisGameScriptLike implements TennisGame {
         return Math.abs(points[0] - points[1]) > 1 ? "Win for" : "Advantage";
     }
 
+    @Override
     public void wonPoint(String player) {
         points["player1".equals(player) ? 0 : 1]++;
     }
