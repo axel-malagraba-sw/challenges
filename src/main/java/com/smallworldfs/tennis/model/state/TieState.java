@@ -2,9 +2,9 @@ package com.smallworldfs.tennis.model.state;
 
 import com.smallworldfs.tennis.model.Player;
 
-public class TieState extends GameState {
+class TieState extends AbstractGameState {
 
-    public TieState(Player player1, Player player2) {
+    TieState(Player player1, Player player2) {
         super(player1, player2);
     }
 
