@@ -1,92 +1,87 @@
 package com.smallworldfs.tennis;
 
-public class TennisGameObjectOriented implements TennisGame {
+import com.smallworldfs.tennis.model.Player;
 
-    public int P1point = 0;
-    public int P2point = 0;
+public class TennisGameObjectOriented implements TennisGame {
 
     public String P1res = "";
     public String P2res = "";
-    private String player1Name;
-    private String player2Name;
 
-    public TennisGameObjectOriented(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-    }
+    private final Player player1 = new Player("player1");
+    private final Player player2 = new Player("player2");
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point < 4) {
-            if (P1point == 0)
+        if (player1.getPoints() == player2.getPoints() && player1.getPoints() < 4) {
+            if (player1.getPoints() == 0)
                 score = "Love";
-            if (P1point == 1)
+            if (player1.getPoints() == 1)
                 score = "Fifteen";
-            if (P1point == 2)
+            if (player1.getPoints() == 2)
                 score = "Thirty";
             score += "-All";
         }
-        if (P1point == P2point && P1point >= 3)
+        if (player1.getPoints() == player2.getPoints() && player1.getPoints() >= 3)
             score = "Deuce";
 
-        if (P1point > 0 && P2point == 0) {
-            if (P1point == 1)
+        if (player1.getPoints() > 0 && player2.getPoints() == 0) {
+            if (player1.getPoints() == 1)
                 P1res = "Fifteen";
-            if (P1point == 2)
+            if (player1.getPoints() == 2)
                 P1res = "Thirty";
-            if (P1point == 3)
+            if (player1.getPoints() == 3)
                 P1res = "Forty";
 
             P2res = "Love";
             score = P1res + "-" + P2res;
         }
-        if (P2point > 0 && P1point == 0) {
-            if (P2point == 1)
+        if (player2.getPoints() > 0 && player1.getPoints() == 0) {
+            if (player2.getPoints() == 1)
                 P2res = "Fifteen";
-            if (P2point == 2)
+            if (player2.getPoints() == 2)
                 P2res = "Thirty";
-            if (P2point == 3)
+            if (player2.getPoints() == 3)
                 P2res = "Forty";
 
             P1res = "Love";
             score = P1res + "-" + P2res;
         }
 
-        if (P1point > P2point && P1point < 4) {
-            if (P1point == 2)
+        if (player1.getPoints() > player2.getPoints() && player1.getPoints() < 4) {
+            if (player1.getPoints() == 2)
                 P1res = "Thirty";
-            if (P1point == 3)
+            if (player1.getPoints() == 3)
                 P1res = "Forty";
-            if (P2point == 1)
+            if (player2.getPoints() == 1)
                 P2res = "Fifteen";
-            if (P2point == 2)
+            if (player2.getPoints() == 2)
                 P2res = "Thirty";
             score = P1res + "-" + P2res;
         }
-        if (P2point > P1point && P2point < 4) {
-            if (P2point == 2)
+        if (player2.getPoints() > player1.getPoints() && player2.getPoints() < 4) {
+            if (player2.getPoints() == 2)
                 P2res = "Thirty";
-            if (P2point == 3)
+            if (player2.getPoints() == 3)
                 P2res = "Forty";
-            if (P1point == 1)
+            if (player1.getPoints() == 1)
                 P1res = "Fifteen";
-            if (P1point == 2)
+            if (player1.getPoints() == 2)
                 P1res = "Thirty";
             score = P1res + "-" + P2res;
         }
 
-        if (P1point > P2point && P2point >= 3) {
+        if (player1.getPoints() > player2.getPoints() && player2.getPoints() >= 3) {
             score = "Advantage player1";
         }
 
-        if (P2point > P1point && P1point >= 3) {
+        if (player2.getPoints() > player1.getPoints() && player1.getPoints() >= 3) {
             score = "Advantage player2";
         }
 
-        if (P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2) {
+        if (player1.getPoints() >= 4 && player2.getPoints() >= 0 && (player1.getPoints() - player2.getPoints()) >= 2) {
             score = "Win for player1";
         }
-        if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
+        if (player2.getPoints() >= 4 && player1.getPoints() >= 0 && (player2.getPoints() - player1.getPoints()) >= 2) {
             score = "Win for player2";
         }
         return score;
@@ -105,11 +100,11 @@ public class TennisGameObjectOriented implements TennisGame {
     }
 
     public void P1Score() {
-        P1point++;
+        player1.wonPoint();
     }
 
     public void P2Score() {
-        P2point++;
+        player2.wonPoint();
     }
 
     public void wonPoint(String player) {

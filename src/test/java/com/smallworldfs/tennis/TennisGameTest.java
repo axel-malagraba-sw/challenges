@@ -81,7 +81,7 @@ class TennisGameTest {
     @ParameterizedTest
     @MethodSource("possibleScoresAndExpectedScore")
     void checkAllScoresTennisGameObjectOriented(int player1Score, int player2Score, String expectedScore) {
-        TennisGame game = new TennisGameObjectOriented("David", "player2");
+        TennisGame game = new TennisGameObjectOriented();
         checkAllScores(game, player1Score, player2Score, expectedScore);
     }
 }
