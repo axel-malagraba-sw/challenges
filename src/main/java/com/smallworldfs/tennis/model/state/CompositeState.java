@@ -1,5 +1,6 @@
-package com.smallworldfs.tennis.model;
+package com.smallworldfs.tennis.model.state;
 
+import com.smallworldfs.tennis.model.Player;
 import java.util.List;
 
 public class CompositeState extends GameState {
@@ -21,6 +22,9 @@ public class CompositeState extends GameState {
     }
 
     private GameState resolveCurrentState() {
-        return states.stream().filter(GameState::isCurrentState).findFirst().orElseThrow();
+        return states.stream()
+                .filter(GameState::isCurrentState)
+                .findFirst()
+                .orElseThrow();
     }
 }

@@ -1,4 +1,6 @@
-package com.smallworldfs.tennis.model;
+package com.smallworldfs.tennis.model.state;
+
+import com.smallworldfs.tennis.model.Player;
 
 public class AdvantageState extends GameState {
 

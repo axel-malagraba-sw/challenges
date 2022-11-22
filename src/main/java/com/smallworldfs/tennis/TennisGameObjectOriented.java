@@ -1,8 +1,8 @@
 package com.smallworldfs.tennis;
 
-import com.smallworldfs.tennis.model.CompositeState;
-import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
+import com.smallworldfs.tennis.model.state.CompositeState;
+import com.smallworldfs.tennis.model.state.GameState;
 
 public class TennisGameObjectOriented implements TennisGame {
 
