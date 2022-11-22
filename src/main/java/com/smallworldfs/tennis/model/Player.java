@@ -1,8 +1,10 @@
 package com.smallworldfs.tennis.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@Getter
+@RequiredArgsConstructor
 public class Player {
 
     private final String name;
@@ -27,5 +29,9 @@ public class Player {
 
     public boolean hasAdvantageOver(Player other) {
         return points - other.points == 1 && points > 3;
+    }
+
+    public boolean hasMorePointsThan(Player other) {
+        return points > other.points;
     }
 }

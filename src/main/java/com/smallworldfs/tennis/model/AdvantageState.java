@@ -12,7 +12,7 @@ public class AdvantageState extends GameState {
     }
 
     @Override
-    public String format() {
-        return "Advantage " + (player1.hasAdvantageOver(player2) ? player1 : player2).getName();
+    public String formatPoints() {
+        return "Advantage " + getWinningPlayer().getName();
     }
 }

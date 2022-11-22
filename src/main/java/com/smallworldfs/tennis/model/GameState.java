@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GameState {
 
-    private static final String[] SCORE_LABELS = new String[] {"Love", "Fifteen", "Thirty", "Forty"};
+    private static final String[] POINT_LABELS = new String[] {"Love", "Fifteen", "Thirty", "Forty"};
 
     protected final Player player1;
     protected final Player player2;
@@ -14,11 +14,15 @@ public class GameState {
         return true;
     }
 
-    public String format() {
-        return mapScore(player1) + "-" + mapScore(player2);
+    public String formatPoints() {
+        return formatPoints(player1) + "-" + formatPoints(player2);
     }
 
-    protected String mapScore(Player player) {
-        return SCORE_LABELS[player.getPoints()];
+    protected String formatPoints(Player player) {
+        return POINT_LABELS[player.getPoints()];
+    }
+
+    protected Player getWinningPlayer() {
+        return player2.hasMorePointsThan(player1) ? player2 : player1;
     }
 }

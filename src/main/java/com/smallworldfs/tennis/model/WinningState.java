@@ -12,7 +12,7 @@ public class WinningState extends GameState {
     }
 
     @Override
-    public String format() {
-        return "Win for " + (player1.hasWonOver(player2) ? player1 : player2).getName();
+    public String formatPoints() {
+        return "Win for " + getWinningPlayer().getName();
     }
 }

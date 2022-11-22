@@ -1,33 +1,26 @@
 package com.smallworldfs.tennis;
 
-import com.smallworldfs.tennis.model.AdvantageState;
+import com.smallworldfs.tennis.model.CompositeState;
 import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
-import com.smallworldfs.tennis.model.TieState;
-import com.smallworldfs.tennis.model.WinningState;
-import java.util.List;
 
 public class TennisGameObjectOriented implements TennisGame {
 
     private final Player player1 = new Player("player1");
     private final Player player2 = new Player("player2");
-    private final GameState baseState = new GameState(player1, player2);
-    private final List<GameState> specialStates = List.of(
-            new WinningState(player1, player2),
-            new AdvantageState(player1, player2),
-            new TieState(player1, player2));
+    private final GameState state = new CompositeState(player1, player2);
 
     @Override
     public String getScore() {
-        return specialStates.stream()
-                .filter(GameState::isCurrentState)
-                .findFirst()
-                .orElse(baseState)
-                .format();
+        return state.formatPoints();
     }
 
     @Override
     public void wonPoint(String playerName) {
-        (player1.hasName(playerName) ? player1 : player2).wonPoint();
+        getPlayerBy(playerName).wonPoint();
+    }
+
+    private Player getPlayerBy(String playerName) {
+        return player1.hasName(playerName) ? player1 : player2;
     }
 }

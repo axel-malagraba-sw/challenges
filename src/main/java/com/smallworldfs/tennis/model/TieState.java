@@ -12,10 +12,10 @@ public class TieState extends GameState {
     }
 
     @Override
-    public String format() {
+    public String formatPoints() {
         if (player1.getPoints() >= 3) {
             return "Deuce";
         }
-        return mapScore(player1) + "-All";
+        return formatPoints(player1) + "-All";
     }
 }
