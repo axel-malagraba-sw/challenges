@@ -24,14 +24,26 @@ public class Player {
     }
 
     public boolean hasWonOver(Player other) {
-        return points - other.points > 1 && points > 3;
+        return calculatePointDiff(other) > 1 && isPastThirdPoint();
     }
 
     public boolean hasAdvantageOver(Player other) {
-        return points - other.points == 1 && points > 3;
+        return calculatePointDiff(other) == 1 && isPastThirdPoint();
+    }
+
+    private int calculatePointDiff(Player other) {
+        return points - other.points;
     }
 
     public boolean hasMorePointsThan(Player other) {
         return points > other.points;
+    }
+
+    public boolean isPastThirdPoint() {
+        return points > 3;
+    }
+
+    public boolean isPastOrAtThirdPoint() {
+        return points >= 3;
     }
 }

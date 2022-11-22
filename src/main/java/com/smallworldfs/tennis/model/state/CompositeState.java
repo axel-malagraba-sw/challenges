@@ -9,10 +9,15 @@ public class CompositeState implements GameState {
 
     public CompositeState(Player player1, Player player2) {
         this.states = List.of(
-                new WinningState(player1, player2),
-                new AdvantageState(player1, player2),
                 new TieState(player1, player2),
-                new DefaultGameState(player1, player2));
+                new EarlyGameState(player1, player2),
+                new WinningState(player1, player2),
+                new AdvantageState(player1, player2));
+    }
+
+    @Override
+    public boolean isCurrentState() {
+        return true;
     }
 
     @Override

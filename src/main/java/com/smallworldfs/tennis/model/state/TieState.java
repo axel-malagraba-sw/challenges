@@ -15,7 +15,7 @@ class TieState extends AbstractGameState {
 
     @Override
     public String formatPoints() {
-        if (player1.getPoints() >= 3) {
+        if (player1.isPastOrAtThirdPoint()) {
             return "Deuce";
         }
         return formatPoints(player1) + "-All";
