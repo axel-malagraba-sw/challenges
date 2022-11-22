@@ -17,7 +17,11 @@ public class Player {
         return this.name.equals(name);
     }
 
-    public boolean hasSamePointsAs(Player player2) {
-        return player2.points == points;
+    public boolean hasSamePointsAs(Player other) {
+        return other.points == points;
+    }
+
+    public boolean hasWonOver(Player other) {
+        return points - other.points > 1 && points > 3;
     }
 }

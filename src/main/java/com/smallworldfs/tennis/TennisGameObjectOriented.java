@@ -3,6 +3,7 @@ package com.smallworldfs.tennis;
 import com.smallworldfs.tennis.model.GameState;
 import com.smallworldfs.tennis.model.Player;
 import com.smallworldfs.tennis.model.TieState;
+import com.smallworldfs.tennis.model.WinningState;
 
 public class TennisGameObjectOriented implements TennisGame {
 
@@ -71,18 +72,20 @@ public class TennisGameObjectOriented implements TennisGame {
             score = "Advantage player2";
         }
 
-        if (player1.getPoints() >= 4 && player2.getPoints() >= 0 && (player1.getPoints() - player2.getPoints()) >= 2) {
-            score = "Win for player1";
-        }
-        if (player2.getPoints() >= 4 && player1.getPoints() >= 0 && (player2.getPoints() - player1.getPoints()) >= 2) {
-            score = "Win for player2";
-        }
+        score = getWinningScore(score);
+
         return score;
     }
 
-    private String getTieScore(String score) {
-        GameState state = new TieState(player1, player2);
+    private String getWinningScore(String score) {
+        return checkState(score, new WinningState(player1, player2));
+    }
 
+    private String getTieScore(String score) {
+        return checkState(score, new TieState(player1, player2));
+    }
+
+    private String checkState(String score, GameState state) {
         if (state.isCurrentState()) {
             return state.format();
         }
