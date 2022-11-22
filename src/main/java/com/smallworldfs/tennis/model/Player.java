@@ -24,4 +24,8 @@ public class Player {
     public boolean hasWonOver(Player other) {
         return points - other.points > 1 && points > 3;
     }
+
+    public boolean hasAdvantageOver(Player other) {
+        return points - other.points == 1 && points > 3;
+    }
 }
