@@ -10,7 +10,7 @@ public class TennisGameScriptLike implements TennisGame {
     @Override
     public String getScore() {
         if (points[0] == points[1]) {
-            return getDrawScore();
+            return points[0] >= SCORING_PHASE_CHANGE ? "Deuce" : SCORE_LABELS[points[0]] + "-All";
         }
         if (points[0] > points[1] && points[0] > SCORING_PHASE_CHANGE) {
             return mapWinningLabel() + " player1";
@@ -19,10 +19,6 @@ public class TennisGameScriptLike implements TennisGame {
             return mapWinningLabel() + " player2";
         }
         return SCORE_LABELS[points[0]] + "-" + SCORE_LABELS[points[1]];
-    }
-
-    private String getDrawScore() {
-        return points[0] >= SCORING_PHASE_CHANGE ? "Deuce" : SCORE_LABELS[points[0]] + "-All";
     }
 
     private String mapWinningLabel() {
