@@ -1,10 +1,11 @@
 package com.smallworldfs.tennis.model.state;
 
 import com.smallworldfs.tennis.model.Player;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-public abstract class AbstractGameState implements GameState {
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+abstract class AbstractGameState implements GameState {
 
     private static final String[] POINT_LABELS = new String[] {"Love", "Fifteen", "Thirty", "Forty"};
 
