@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,9 @@ public final class ApplicationTest {
 
     @AfterEach
     public void kill_the_application() throws IOException, InterruptedException {
+        ProjectRegistry.getInstance().clear();
+        execute("quit");
+
         if (!stillRunning()) {
             return;
         }
@@ -95,8 +99,33 @@ public final class ApplicationTest {
                 "    [ ] 7: Outside-In TDD",
                 "    [ ] 8: Interaction-Driven Design",
                 "");
+    }
 
-        execute("quit");
+    @Test
+    @Timeout(value = 1)
+    public void should_return_default_message_for_unknown_command() throws IOException {
+        execute("dance for me");
+        readLines("I don't know what the command \"dance for me\" is.");
+    }
+
+    @Test
+    @Timeout(value = 1)
+    public void today_command_returns_default_message_when_no_tasks_with_today_deadline() throws IOException {
+        execute("today");
+        readLines("There are no tasks due today.");
+    }
+
+    @Test
+    public void when_deadline_is_added_to_task_with_today_date_it_is_returned_in_today_command() throws IOException {
+        execute("add project training");
+        execute("add task training Task 1");
+        execute("add task training Task 2");
+        execute("deadline 1 " + LocalDate.now());
+
+        execute("today");
+        readLines("training",
+                "    [ ] 1: Task 1 (Due " + LocalDate.now() + ")",
+                "");
     }
 
     private void execute(String command) throws IOException {
@@ -108,7 +137,9 @@ public final class ApplicationTest {
         int length = expectedOutput.length();
         char[] buffer = new char[length];
         outReader.read(buffer, 0, length);
-        assertEquals(String.valueOf(buffer), expectedOutput);
+        String actualValue = String.valueOf(buffer);
+
+        assertEquals(expectedOutput, actualValue);
     }
 
     private void readLines(String... expectedOutput) throws IOException {

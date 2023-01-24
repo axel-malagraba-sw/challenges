@@ -12,9 +12,4 @@ public class PrintWriterOutput implements Output {
     public void write(String text) {
         writer.write(text);
     }
-
-    @Override
-    public void writeFormatted(String text, Object... parameters) {
-        writer.printf(text, parameters);
-    }
 }

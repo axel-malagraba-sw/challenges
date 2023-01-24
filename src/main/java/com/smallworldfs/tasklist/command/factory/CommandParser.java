@@ -3,20 +3,24 @@ package com.smallworldfs.tasklist.command.factory;
 import com.smallworldfs.tasklist.command.AddCommand;
 import com.smallworldfs.tasklist.command.CheckCommand;
 import com.smallworldfs.tasklist.command.Command;
+import com.smallworldfs.tasklist.command.DeadlineCommand;
 import com.smallworldfs.tasklist.command.HelpCommand;
 import com.smallworldfs.tasklist.command.ShowCommand;
+import com.smallworldfs.tasklist.command.TodayCommand;
 import com.smallworldfs.tasklist.command.UncheckCommand;
 import com.smallworldfs.tasklist.command.UnknownCommand;
 import com.smallworldfs.tasklist.io.Arguments;
 import java.util.List;
+import java.util.Optional;
 
 public class CommandParser {
 
     private static final String EMPTY = "";
-
-    private static final ParsedCommand UNKNOWN_COMMAND = new ParsedCommand(new UnknownCommand(), null);
+    private static final Command UNKNOWN_COMMAND = new UnknownCommand();
 
     private final List<Command> commands = List.of(
+            new DeadlineCommand(),
+            new TodayCommand(),
             new CheckCommand(),
             new UncheckCommand(),
             new AddCommand(),
@@ -32,11 +36,11 @@ public class CommandParser {
     }
 
     private ParsedCommand parse(String commandName, Arguments arguments) {
-        return commands.stream()
-                .filter(command -> command.matches(commandName))
-                .findFirst()
-                .map(command -> new ParsedCommand(command, arguments))
-                .orElse(UNKNOWN_COMMAND);
+        return new ParsedCommand(findCommand(commandName).orElse(UNKNOWN_COMMAND), arguments);
+    }
+
+    private Optional<Command> findCommand(String commandName) {
+        return commands.stream().filter(command -> command.matches(commandName)).findFirst();
     }
 
     private String getArgumentString(String[] commandLine) {

@@ -1,18 +1,17 @@
 package com.smallworldfs.tasklist.command;
 
+import com.smallworldfs.tasklist.Project;
+import com.smallworldfs.tasklist.ProjectRegistry;
 import com.smallworldfs.tasklist.Task;
-import com.smallworldfs.tasklist.TaskRegistry;
 import com.smallworldfs.tasklist.io.Arguments;
 import com.smallworldfs.tasklist.io.Output;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 public class AddCommand implements Command {
 
     private long lastId = 0;
 
-    private final Map<String, List<Task>> tasks = TaskRegistry.getInstance().getTasks();
+    private final ProjectRegistry registry = ProjectRegistry.getInstance();
 
     @Override
     public void run(Arguments arguments, Output output) {
@@ -27,16 +26,17 @@ public class AddCommand implements Command {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new ArrayList<>());
+        registry.createProject(name);
     }
 
-    private void addTask(String project, String description, Output output) {
-        List<Task> projectTasks = tasks.get(project);
-        if (projectTasks == null) {
-            output.writeFormatted("Could not find a project with the name \"%s\".", project);
+    private void addTask(String projectName, String description, Output output) {
+        Optional<Project> storedProject = registry.find(projectName);
+
+        if (storedProject.isEmpty()) {
+            output.writeFormatted("Could not find a project with the name \"%s\".", projectName);
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        storedProject.get().addTask(new Task(nextId(), description));
     }
 
     private long nextId() {

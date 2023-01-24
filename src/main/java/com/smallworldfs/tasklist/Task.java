@@ -1,30 +1,36 @@
 package com.smallworldfs.tasklist;
 
+import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
 public final class Task {
 
     private final long id;
     private final String description;
     private boolean done;
+    @Setter
+    private LocalDate deadline;
 
-    public Task(long id, String description, boolean done) {
+    public Task(long id, String description) {
         this.id = id;
         this.description = description;
-        this.done = done;
     }
 
-    public long getId() {
-        return id;
+    public boolean isDueToday() {
+        return LocalDate.now().equals(deadline);
     }
 
-    public String getDescription() {
-        return description;
+    public void check() {
+        done = true;
     }
 
-    public boolean isDone() {
-        return done;
+    public void uncheck() {
+        done = false;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public boolean hasDeadline() {
+        return deadline != null;
     }
 }
