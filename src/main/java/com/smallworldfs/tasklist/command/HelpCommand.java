@@ -13,6 +13,8 @@ public class HelpCommand implements Command {
         output.writeln("  add task <project name> <task description>");
         output.writeln("  check <task ID>");
         output.writeln("  uncheck <task ID>");
+        output.writeln("  deadline <task ID> <date yyyy-mm-dd>");
+        output.writeln("  today");
         output.newLine();
     }
 
