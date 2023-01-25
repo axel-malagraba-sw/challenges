@@ -1,15 +1,14 @@
-package com.smallworldfs.tasklist.command.factory;
+package com.smallworldfs.tasklist.cli.command;
 
-import com.smallworldfs.tasklist.command.AddCommand;
-import com.smallworldfs.tasklist.command.CheckCommand;
-import com.smallworldfs.tasklist.command.Command;
-import com.smallworldfs.tasklist.command.DeadlineCommand;
-import com.smallworldfs.tasklist.command.HelpCommand;
-import com.smallworldfs.tasklist.command.ShowCommand;
-import com.smallworldfs.tasklist.command.TodayCommand;
-import com.smallworldfs.tasklist.command.UncheckCommand;
-import com.smallworldfs.tasklist.command.UnknownCommand;
-import com.smallworldfs.tasklist.io.Arguments;
+import com.smallworldfs.tasklist.cli.HelpCommand;
+import com.smallworldfs.tasklist.cli.UnknownCommand;
+import com.smallworldfs.tasklist.cli.io.Arguments;
+import com.smallworldfs.tasklist.task.completion.CheckCommand;
+import com.smallworldfs.tasklist.task.completion.UncheckCommand;
+import com.smallworldfs.tasklist.task.crud.AddCommand;
+import com.smallworldfs.tasklist.task.crud.ShowCommand;
+import com.smallworldfs.tasklist.task.timeline.DeadlineCommand;
+import com.smallworldfs.tasklist.task.timeline.TodayCommand;
 import java.util.List;
 import java.util.Optional;
 

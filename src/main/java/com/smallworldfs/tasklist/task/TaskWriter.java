@@ -1,7 +1,6 @@
-package com.smallworldfs.tasklist.io;
+package com.smallworldfs.tasklist.task;
 
-import com.smallworldfs.tasklist.Project;
-import com.smallworldfs.tasklist.Task;
+import com.smallworldfs.tasklist.cli.io.Output;
 import java.util.List;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TaskWriter {
 
-    public static final String TASK_TEMPLATE = "    [%c] %d: %s%s";
+    private static final String TASK_TEMPLATE = "    [%c] %d: %s%s";
+
     private final Output output;
     private final List<Project> projects;
 

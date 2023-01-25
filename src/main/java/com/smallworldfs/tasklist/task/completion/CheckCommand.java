@@ -1,8 +1,9 @@
-package com.smallworldfs.tasklist.command;
+package com.smallworldfs.tasklist.task.completion;
 
-import com.smallworldfs.tasklist.Task;
-import com.smallworldfs.tasklist.io.Arguments;
-import com.smallworldfs.tasklist.io.Output;
+import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
+import com.smallworldfs.tasklist.cli.io.Arguments;
+import com.smallworldfs.tasklist.cli.io.Output;
+import com.smallworldfs.tasklist.task.Task;
 
 public class CheckCommand extends TaskTargetingCommand {
 

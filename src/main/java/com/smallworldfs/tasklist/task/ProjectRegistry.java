@@ -1,7 +1,6 @@
-package com.smallworldfs.tasklist;
+package com.smallworldfs.tasklist.task;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,15 +37,6 @@ public class ProjectRegistry {
 
     public Optional<Project> find(String name) {
         return Optional.ofNullable(projects.get(name));
-    }
-
-    public Optional<Task> findTaskById(String id) {
-        return projects.values()
-                .stream()
-                .map(Project::getTasks)
-                .flatMap(Collection::stream)
-                .filter(task -> id.equals(String.valueOf(task.getId())))
-                .findFirst();
     }
 
     public void createProject(String name) {

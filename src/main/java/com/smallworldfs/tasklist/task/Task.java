@@ -1,4 +1,4 @@
-package com.smallworldfs.tasklist;
+package com.smallworldfs.tasklist.task;
 
 import java.time.LocalDate;
 import lombok.Getter;

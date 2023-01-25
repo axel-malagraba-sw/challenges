@@ -1,10 +1,11 @@
-package com.smallworldfs.tasklist.command;
+package com.smallworldfs.tasklist.task.timeline;
 
-import com.smallworldfs.tasklist.Project;
-import com.smallworldfs.tasklist.ProjectRegistry;
-import com.smallworldfs.tasklist.io.Arguments;
-import com.smallworldfs.tasklist.io.Output;
-import com.smallworldfs.tasklist.io.TaskWriter;
+import com.smallworldfs.tasklist.cli.command.Command;
+import com.smallworldfs.tasklist.cli.io.Arguments;
+import com.smallworldfs.tasklist.cli.io.Output;
+import com.smallworldfs.tasklist.task.Project;
+import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.task.TaskWriter;
 import java.util.List;
 
 public class TodayCommand implements Command {

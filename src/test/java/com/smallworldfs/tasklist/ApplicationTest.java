@@ -3,6 +3,7 @@ package com.smallworldfs.tasklist;
 import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.smallworldfs.tasklist.task.ProjectRegistry;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

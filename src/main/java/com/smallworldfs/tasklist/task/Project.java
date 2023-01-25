@@ -1,4 +1,4 @@
-package com.smallworldfs.tasklist;
+package com.smallworldfs.tasklist.task;
 
 import java.util.ArrayList;
 import java.util.List;

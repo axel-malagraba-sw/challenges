@@ -1,4 +1,4 @@
-package com.smallworldfs.tasklist.io;
+package com.smallworldfs.tasklist.cli.io;
 
 import lombok.Data;
 

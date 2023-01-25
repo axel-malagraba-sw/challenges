@@ -1,7 +1,7 @@
-package com.smallworldfs.tasklist.command;
+package com.smallworldfs.tasklist.cli.command;
 
-import com.smallworldfs.tasklist.io.Arguments;
-import com.smallworldfs.tasklist.io.Output;
+import com.smallworldfs.tasklist.cli.io.Arguments;
+import com.smallworldfs.tasklist.cli.io.Output;
 
 public interface Command {
 

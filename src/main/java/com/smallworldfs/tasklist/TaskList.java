@@ -1,7 +1,7 @@
 package com.smallworldfs.tasklist;
 
-import com.smallworldfs.tasklist.command.factory.CommandParser;
-import com.smallworldfs.tasklist.io.PrintWriterOutput;
+import com.smallworldfs.tasklist.cli.command.CommandParser;
+import com.smallworldfs.tasklist.cli.io.PrintWriterOutput;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
