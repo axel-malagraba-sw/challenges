@@ -3,7 +3,7 @@ package com.smallworldfs.tasklist;
 import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +15,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(ProjectRegistryExtension.class)
 public final class ApplicationTest {
 
     public static final String PROMPT = "> ";
@@ -41,7 +43,6 @@ public final class ApplicationTest {
 
     @AfterEach
     public void kill_the_application() throws IOException, InterruptedException {
-        ProjectRegistry.getInstance().clear();
         execute("quit");
 
         if (!stillRunning()) {

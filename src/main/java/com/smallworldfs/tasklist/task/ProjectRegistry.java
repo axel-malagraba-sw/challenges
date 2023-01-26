@@ -39,7 +39,11 @@ public class ProjectRegistry {
         return Optional.ofNullable(projects.get(name));
     }
 
-    public void createProject(String name) {
-        projects.put(name, new Project(name));
+    public Project createProject(String name) {
+        Project project = new Project(name);
+
+        projects.put(name, project);
+
+        return project;
     }
 }

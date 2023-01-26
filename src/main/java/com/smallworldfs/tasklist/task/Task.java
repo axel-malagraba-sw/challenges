@@ -7,14 +7,14 @@ import lombok.Setter;
 @Getter
 public final class Task {
 
-    private final long id;
+    private final String id;
     private final String description;
     private boolean done;
     @Setter
     private LocalDate deadline;
 
     public Task(long id, String description) {
-        this.id = id;
+        this.id = String.valueOf(id);
         this.description = description;
     }
 

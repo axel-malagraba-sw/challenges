@@ -22,7 +22,7 @@ public abstract class TaskTargetingCommand implements Command {
                 .stream()
                 .map(Project::getTasks)
                 .flatMap(Collection::stream)
-                .filter(task -> id.equals(String.valueOf(task.getId())))
+                .filter(task -> id.equals(task.getId()))
                 .findFirst();
     }
 

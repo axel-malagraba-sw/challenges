@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TaskWriter {
 
-    private static final String TASK_TEMPLATE = "    [%c] %d: %s%s";
+    private static final String TASK_TEMPLATE = "    [%c] %s: %s%s";
 
     private final Output output;
     private final List<Project> projects;
