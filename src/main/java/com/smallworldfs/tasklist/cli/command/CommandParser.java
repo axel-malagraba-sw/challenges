@@ -6,6 +6,7 @@ import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.task.completion.CheckCommand;
 import com.smallworldfs.tasklist.task.completion.UncheckCommand;
 import com.smallworldfs.tasklist.task.crud.AddCommand;
+import com.smallworldfs.tasklist.task.crud.RenameCommand;
 import com.smallworldfs.tasklist.task.crud.ShowCommand;
 import com.smallworldfs.tasklist.task.timeline.DeadlineCommand;
 import com.smallworldfs.tasklist.task.timeline.TodayCommand;
@@ -24,7 +25,8 @@ public class CommandParser {
             new UncheckCommand(),
             new AddCommand(),
             new ShowCommand(),
-            new HelpCommand());
+            new HelpCommand(),
+            new RenameCommand());
 
     public ParsedCommand parse(String line) {
         String[] commandLine = line.trim().split(" ", 2);

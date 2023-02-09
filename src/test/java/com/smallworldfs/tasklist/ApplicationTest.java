@@ -130,6 +130,19 @@ public final class ApplicationTest {
                 "");
     }
 
+    @Test
+    public void when_task_is_renamed_should_change_task_id() throws IOException {
+        execute("add project training");
+        execute("add task training Fantasy league task");
+        execute("rename 1 FantasyLeague");
+        execute("check FantasyLeague");
+
+        execute("show");
+        readLines("training",
+                "    [x] FantasyLeague: Fantasy league task",
+                "");
+    }
+
     private void execute(String command) throws IOException {
         read(PROMPT);
         write(command);

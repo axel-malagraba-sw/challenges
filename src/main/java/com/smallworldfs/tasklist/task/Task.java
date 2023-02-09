@@ -7,8 +7,9 @@ import lombok.Setter;
 @Getter
 public final class Task {
 
-    private final String id;
     private final String description;
+    @Setter
+    private String id;
     private boolean done;
     @Setter
     private LocalDate deadline;
