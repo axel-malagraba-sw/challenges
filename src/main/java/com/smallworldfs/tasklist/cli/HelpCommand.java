@@ -16,6 +16,8 @@ public class HelpCommand implements Command {
         output.writeln("  uncheck <task ID>");
         output.writeln("  deadline <task ID> <date yyyy-mm-dd>");
         output.writeln("  today");
+        output.writeln("  rename <task ID> <new task ID>");
+        output.writeln("  delete <task ID>");
         output.newLine();
     }
 

@@ -28,6 +28,13 @@ public class TestOutput implements Output {
             return this;
         }
 
+        public OutputAssert startsWithLine(String expected) {
+            String errorMessage = "Expected string '" + output.stringBuilder + "' to start with '" + expected + "'";
+
+            assertTrue(output.stringBuilder.toString().startsWith(expected + System.lineSeparator()), errorMessage);
+            return this;
+        }
+
         public OutputAssert contains(String expected) {
             String errorMessage = "Expected string '" + output.stringBuilder + "' to contain '" + expected + "'";
 

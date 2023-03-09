@@ -143,6 +143,42 @@ public final class ApplicationTest {
                 "");
     }
 
+    @Test
+    public void when_task_is_deleted_it_is_not_shown() throws IOException {
+        execute("add project training");
+        execute("add task training Task 1");
+        execute("add task training Task 2");
+        execute("show");
+        readLines("training",
+                "    [ ] 1: Task 1",
+                "    [ ] 2: Task 2",
+                "");
+
+        execute("delete 1");
+
+        execute("show");
+        readLines("training",
+                "    [ ] 2: Task 2",
+                "");
+    }
+
+    @Test
+    public void help_prints_available_commands() throws IOException {
+        execute("help");
+
+        readLines("Commands:",
+                "  show",
+                "  add project <project name>",
+                "  add task <project name> <task description>",
+                "  check <task ID>",
+                "  uncheck <task ID>",
+                "  deadline <task ID> <date yyyy-mm-dd>",
+                "  today",
+                "  rename <task ID> <new task ID>",
+                "  delete <task ID>",
+                "");
+    }
+
     private void execute(String command) throws IOException {
         read(PROMPT);
         write(command);

@@ -2,6 +2,7 @@ package com.smallworldfs.tasklist.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.Data;
 
@@ -21,5 +22,9 @@ public class Project {
 
     public boolean hasTasksDueToday() {
         return tasks.stream().anyMatch(Task::isDueToday);
+    }
+
+    public boolean removeTask(String taskId) {
+        return tasks.removeIf(task -> Objects.equals(taskId, task.getId()));
     }
 }

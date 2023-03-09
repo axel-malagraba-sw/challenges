@@ -17,7 +17,7 @@ public abstract class TaskTargetingCommand implements Command {
         findTaskById(id).ifPresentOrElse(consumer, taskNotFoundHandler(output, id));
     }
 
-    private Optional<Task> findTaskById(String id) {
+    protected Optional<Task> findTaskById(String id) {
         return registry.getAll()
                 .stream()
                 .map(Project::getTasks)
@@ -26,7 +26,7 @@ public abstract class TaskTargetingCommand implements Command {
                 .findFirst();
     }
 
-    private Runnable taskNotFoundHandler(Output output, String id) {
+    protected Runnable taskNotFoundHandler(Output output, String id) {
         return () -> output.writeFormatted("Could not find a task with an ID of %s.", id);
     }
 }
