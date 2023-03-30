@@ -2,7 +2,7 @@ package com.smallworldfs.tasklist.task.timeline;
 
 import com.smallworldfs.tasklist.cli.command.NoArgumentsCommand;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
-import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
+import com.smallworldfs.tasklist.cli.command.match.IsEqualToCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.project.Project;
 import com.smallworldfs.tasklist.project.ProjectRegistry;
@@ -13,7 +13,7 @@ import lombok.Getter;
 public class TodayCommand extends NoArgumentsCommand {
 
     @Getter
-    private final CommandMatcher matcher = new StartsWithCommandMatcher("today");
+    private final CommandMatcher matcher = new IsEqualToCommandMatcher("today");
     private final ProjectRegistry registry = ProjectRegistry.getInstance();
 
     @Override

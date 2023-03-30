@@ -2,14 +2,14 @@ package com.smallworldfs.tasklist.cli;
 
 import com.smallworldfs.tasklist.cli.command.NoArgumentsCommand;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
-import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
+import com.smallworldfs.tasklist.cli.command.match.IsEqualToCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Output;
 import lombok.Getter;
 
 public class HelpCommand extends NoArgumentsCommand {
 
     @Getter
-    private final CommandMatcher matcher = new StartsWithCommandMatcher("help");
+    private final CommandMatcher matcher = new IsEqualToCommandMatcher("help");
 
     @Override
     public void run(Output output) {
