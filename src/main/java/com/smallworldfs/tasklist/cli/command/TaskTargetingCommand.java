@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public abstract class TaskTargetingCommand implements Command {
+public abstract class TaskTargetingCommand<T> implements Command<T> {
 
     protected ProjectRegistry registry = ProjectRegistry.getInstance();
 

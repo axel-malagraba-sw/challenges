@@ -4,6 +4,8 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
 
 import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
+import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
+import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
@@ -13,12 +15,14 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import lombok.Getter;
 
-public class RenameCommand extends TaskTargetingCommand {
+public class RenameCommand extends TaskTargetingCommand<Arguments> {
 
     private static final Pattern VALID_ID_PATTERN = compile("^\\d*[a-z][a-z\\d]+$", CASE_INSENSITIVE);
     private static final String INVALID_ID_MESSAGE =
             "New id '%s' is not valid. It must be an alphanumeric string containing at least one character.";
 
+    @Getter
+    private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("rename");
 

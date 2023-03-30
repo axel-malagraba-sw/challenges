@@ -1,6 +1,8 @@
 package com.smallworldfs.tasklist.task.timeline;
 
 import com.smallworldfs.tasklist.cli.command.Command;
+import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
+import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
@@ -11,8 +13,10 @@ import com.smallworldfs.tasklist.task.TaskWriter;
 import java.util.List;
 import lombok.Getter;
 
-public class TodayCommand implements Command {
+public class TodayCommand implements Command<Arguments> {
 
+    @Getter
+    private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("today");
     private final ProjectRegistry registry = ProjectRegistry.getInstance();

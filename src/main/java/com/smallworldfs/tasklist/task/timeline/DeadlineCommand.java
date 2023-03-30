@@ -1,6 +1,8 @@
 package com.smallworldfs.tasklist.task.timeline;
 
 import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
+import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
+import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
@@ -11,8 +13,10 @@ import java.util.function.Consumer;
 import lombok.Data;
 import lombok.Getter;
 
-public class DeadlineCommand extends TaskTargetingCommand {
+public class DeadlineCommand extends TaskTargetingCommand<Arguments> {
 
+    @Getter
+    private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("deadline");
 

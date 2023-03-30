@@ -1,14 +1,18 @@
 package com.smallworldfs.tasklist.cli;
 
 import com.smallworldfs.tasklist.cli.command.Command;
+import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
+import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import lombok.Getter;
 
-public class HelpCommand implements Command {
+public class HelpCommand implements Command<Arguments> {
 
+    @Getter
+    private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("help");
 
