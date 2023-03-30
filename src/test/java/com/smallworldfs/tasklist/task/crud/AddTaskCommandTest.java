@@ -50,4 +50,9 @@ public class AddTaskCommandTest extends AbstractCommandTest<AddTaskCommand> {
     void throws_exception_when_only_one_argument_is_provided() {
         assertThrows(InvalidCommandArgumentsException.class, () -> run("add task test"));
     }
+
+    @Test
+    void help_returns_example() {
+        assertHelpIsEqualTo("add task <project name> <task description>");
+    }
 }
