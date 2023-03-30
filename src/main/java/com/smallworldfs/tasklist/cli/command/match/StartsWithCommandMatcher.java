@@ -1,13 +1,8 @@
 package com.smallworldfs.tasklist.cli.command.match;
 
 import com.smallworldfs.tasklist.cli.command.CommandLine;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-public class StartsWithCommandMatcher implements CommandMatcher {
-
-    private final String prefix;
-
+public record StartsWithCommandMatcher(String prefix) implements CommandMatcher {
 
     @Override
     public boolean matches(CommandLine commandLine) {
