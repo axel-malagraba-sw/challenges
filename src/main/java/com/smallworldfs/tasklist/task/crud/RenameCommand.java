@@ -3,9 +3,9 @@ package com.smallworldfs.tasklist.task.crud;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
 
-import com.smallworldfs.tasklist.cli.command.CommandMatcher;
-import com.smallworldfs.tasklist.cli.command.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
+import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
+import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.task.Task;

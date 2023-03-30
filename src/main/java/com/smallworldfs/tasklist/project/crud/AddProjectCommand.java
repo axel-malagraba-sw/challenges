@@ -1,8 +1,8 @@
 package com.smallworldfs.tasklist.project.crud;
 
 import com.smallworldfs.tasklist.cli.command.Command;
-import com.smallworldfs.tasklist.cli.command.CommandMatcher;
-import com.smallworldfs.tasklist.cli.command.StartsWithCommandMatcher;
+import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
+import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.project.ProjectRegistry;

@@ -1,5 +1,6 @@
 package com.smallworldfs.tasklist.cli.command;
 
+import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 

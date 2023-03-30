@@ -1,4 +1,4 @@
-package com.smallworldfs.tasklist.cli.command;
+package com.smallworldfs.tasklist.cli.command.match;
 
 import lombok.RequiredArgsConstructor;
 
