@@ -1,5 +1,6 @@
 package com.smallworldfs.tasklist.cli.command.arguments;
 
+import com.smallworldfs.tasklist.cli.command.CommandLine;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 
 public class DefaultArgumentsParser implements ArgumentParser<Arguments> {
@@ -7,10 +8,10 @@ public class DefaultArgumentsParser implements ArgumentParser<Arguments> {
     private static final String EMPTY = "";
 
     @Override
-    public Arguments parse(String commandLine) {
-        String[] splitLine = commandLine.trim().split(" ", 2);
+    public Arguments parse(CommandLine commandLine) {
+        String[] splitLine = commandLine.raw().split(" ", 2);
 
-        return new Arguments(getArgumentString(splitLine), commandLine);
+        return new Arguments(getArgumentString(splitLine), commandLine.raw());
     }
 
     private String getArgumentString(String[] splitLine) {

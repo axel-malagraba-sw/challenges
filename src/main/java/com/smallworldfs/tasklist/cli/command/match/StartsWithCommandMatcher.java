@@ -1,5 +1,6 @@
 package com.smallworldfs.tasklist.cli.command.match;
 
+import com.smallworldfs.tasklist.cli.command.CommandLine;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -9,7 +10,7 @@ public class StartsWithCommandMatcher implements CommandMatcher {
 
 
     @Override
-    public boolean matches(String commandLine) {
-        return commandLine.startsWith(prefix);
+    public boolean matches(CommandLine commandLine) {
+        return commandLine.raw().startsWith(prefix);
     }
 }

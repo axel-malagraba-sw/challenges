@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.smallworldfs.tasklist.cli.command.CommandLine;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.TestOutput;
 import com.smallworldfs.tasklist.project.Project;
@@ -23,7 +24,7 @@ class DeleteCommandTest {
 
     @Test
     void should_match_delete_command() {
-        assertTrue(command.getMatcher().matches("delete 1"));
+        assertTrue(command.getMatcher().matches(new CommandLine("delete 1")));
     }
 
     @Test

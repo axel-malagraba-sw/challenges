@@ -1,34 +1,36 @@
 package com.smallworldfs.tasklist.task.crud;
 
+import static com.smallworldfs.tasklist.task.crud.AddTaskCommand.NewTask;
+
 import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
-import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
-import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.Task;
 import lombok.Getter;
 
-public class AddTaskCommand implements Command<Arguments> {
+public class AddTaskCommand implements Command<NewTask> {
 
     private long lastId = 0;
 
-    @Getter
-    private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("add task");
     private final ProjectRegistry registry = ProjectRegistry.getInstance();
 
     @Override
-    public void run(Arguments arguments, Output output) {
-        String[] subcommandRest = arguments.getCommandLine().split(" ", 4);
-        addTask(subcommandRest[2], subcommandRest[3]);
+    public void run(NewTask task, Output output) {
+        registry.find(task.project()).addTask(new Task(nextId(), task.description()));
     }
 
-    private void addTask(String projectName, String description) {
-        registry.find(projectName).addTask(new Task(nextId(), description));
+    @Override
+    public ArgumentParser<NewTask> getArgumentParser() {
+        return commandLine -> {
+            String[] chunks = commandLine.splitIntoChunksForCommand(4, this);
+
+            return new NewTask(chunks[2], chunks[3]);
+        };
     }
 
     private long nextId() {
@@ -38,5 +40,8 @@ public class AddTaskCommand implements Command<Arguments> {
     @Override
     public String help() {
         return "add task <project name> <task description>";
+    }
+
+    record NewTask(String project, String description) {
     }
 }
