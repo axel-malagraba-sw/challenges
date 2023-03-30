@@ -2,7 +2,6 @@ package com.smallworldfs.tasklist.task.timeline;
 
 import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
 
-import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.TestOutput;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import com.smallworldfs.tasklist.task.Task;
@@ -18,7 +17,7 @@ public class TodayCommandTest {
 
     @Test
     void should_return_default_message_when_no_tasks_due_today() {
-        command.run(Arguments.empty(), output);
+        command.run(output);
 
         assertThat(output).is("There are no tasks due today.");
     }
@@ -27,7 +26,7 @@ public class TodayCommandTest {
     void should_return_task_due_today(Task task) {
         task.setDeadline(LocalDate.now());
 
-        command.run(Arguments.empty(), output);
+        command.run(output);
 
         assertThat(output)
                 .contains(task.getId())

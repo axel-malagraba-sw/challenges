@@ -18,8 +18,4 @@ public class Arguments {
     public String[] splitIn(int arguments) {
         return argumentString.split(" ", arguments);
     }
-
-    public static Arguments empty() {
-        return new Arguments("");
-    }
 }
