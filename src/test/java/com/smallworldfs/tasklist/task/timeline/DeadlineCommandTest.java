@@ -1,44 +1,73 @@
 package com.smallworldfs.tasklist.task.timeline;
 
-import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.smallworldfs.tasklist.cli.io.Arguments;
-import com.smallworldfs.tasklist.cli.io.TestOutput;
-import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
+import com.smallworldfs.tasklist.AbstractCommandTest;
 import com.smallworldfs.tasklist.task.Task;
 import com.smallworldfs.tasklist.task.TaskNotFoundException;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(ProjectRegistryExtension.class)
-public class DeadlineCommandTest {
+public class DeadlineCommandTest extends AbstractCommandTest<DeadlineCommand> {
 
-    private final DeadlineCommand command = new DeadlineCommand();
-    private final TestOutput output = new TestOutput();
-
-    @Test
-    void should_throw_exception_when_referenced_task_does_not_exist() {
-        assertThrows(TaskNotFoundException.class, () -> command.run(new Arguments("1 2025-01-18"), output));
+    public DeadlineCommandTest() {
+        super(new DeadlineCommand());
     }
 
     @Test
-    void should_set_specified_deadline_to_task(Task task) {
-        command.run(new Arguments(task.getId() + " 2025-01-18"), output);
+    void matches_command_without_arguments() {
+        assertMatches("deadline");
+    }
 
-        assertThat(output).isEmpty();
+    @Test
+    void matches_command_with_full_arguments() {
+        assertMatches("deadline 1 2025-01-18");
+    }
+
+    @Test
+    void matches_command_with_only_one_argument() {
+        assertMatches("deadline 1");
+    }
+
+    @Test
+    void throws_exception_when_date_is_not_valid() {
+        assertThrowsInvalidCommandArgumentException("deadline 1 potato");
+    }
+
+    @Test
+    void throws_exception_when_only_one_argument_is_provided() {
+        assertThrowsInvalidCommandArgumentException("deadline 2");
+    }
+
+    @Test
+    void throws_exception_when_no_arguments_are_provided() {
+        assertThrowsInvalidCommandArgumentException("deadline");
+    }
+
+    @Test
+    void throws_exception_when_referenced_task_does_not_exist() {
+        assertThrows(TaskNotFoundException.class, () -> run("deadline 1 2025-01-18"));
+    }
+
+    @Test
+    void sets_specified_deadline_to_task(Task task) {
+        run("deadline " + task.getId() + " 2025-01-18");
+
         assertEquals(LocalDate.of(2025, 1, 18), task.getDeadline());
     }
 
     @Test
-    void should_change_deadline_if_task_already_has_deadline(Task task) {
+    void changes_deadline_if_task_already_has_deadline(Task task) {
         task.setDeadline(LocalDate.of(2023, 5, 28));
 
-        command.run(new Arguments(task.getId() + " 2025-11-13"), output);
+        run("deadline " + task.getId() + " 2025-11-13");
 
-        assertThat(output).isEmpty();
         assertEquals(LocalDate.of(2025, 11, 13), task.getDeadline());
+    }
+
+    @Test
+    void help_returns_example() {
+        assertHelpIsEqualTo("deadline <task ID> <date yyyy-mm-dd>");
     }
 }
