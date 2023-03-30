@@ -16,7 +16,7 @@ public class HelpCommand extends NoArgumentsCommand {
 
     @Getter
     private final CommandMatcher matcher = new IsEqualToCommandMatcher("help");
-    private final Supplier<Stream<Command<?>>> commandsSupplier;
+    private final Supplier<Stream<Command<?>>> commands;
 
     @Override
     public void run(Output output) {
@@ -26,7 +26,7 @@ public class HelpCommand extends NoArgumentsCommand {
     }
 
     private void writeCommands(Output output) {
-        commandsSupplier.get()
+        commands.get()
                 .map(Command::help)
                 .filter(Objects::nonNull)
                 .map(help -> "  " + help)
