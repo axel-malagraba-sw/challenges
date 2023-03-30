@@ -1,6 +1,6 @@
 package com.smallworldfs.tasklist.task.crud;
 
-import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
+import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
 import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
@@ -8,9 +8,10 @@ import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.project.ProjectRegistry;
+import com.smallworldfs.tasklist.task.TaskNotFoundException;
 import lombok.Getter;
 
-public class DeleteCommand extends TaskTargetingCommand<Arguments> {
+public class DeleteCommand implements Command<Arguments> {
 
     @Getter
     private final ArgumentParser<Arguments> argumentParser = new DefaultArgumentsParser();
@@ -23,7 +24,7 @@ public class DeleteCommand extends TaskTargetingCommand<Arguments> {
         String id = arguments.getArgumentString();
 
         if (!deleteTask(id)) {
-            taskNotFoundHandler(output, id).run();
+            throw new TaskNotFoundException(id);
         }
     }
 

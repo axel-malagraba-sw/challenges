@@ -1,7 +1,7 @@
 package com.smallworldfs.tasklist.task.crud;
 
-import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.smallworldfs.tasklist.cli.io.Arguments;
@@ -10,6 +10,7 @@ import com.smallworldfs.tasklist.project.Project;
 import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import com.smallworldfs.tasklist.task.Task;
+import com.smallworldfs.tasklist.task.TaskNotFoundException;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,9 +29,7 @@ class DeleteCommandTest {
 
     @Test
     void should_output_error_message_when_task_does_not_exist() {
-        command.run(new Arguments("1"), output);
-
-        assertThat(output).is("Could not find a task with an ID of 1.");
+        assertThrows(TaskNotFoundException.class, () -> command.run(new Arguments("1"), output));
     }
 
     @Test

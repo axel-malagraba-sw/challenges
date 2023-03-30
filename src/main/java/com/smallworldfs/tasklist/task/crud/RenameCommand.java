@@ -3,7 +3,6 @@ package com.smallworldfs.tasklist.task.crud;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
 
-import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
 import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
 import com.smallworldfs.tasklist.cli.command.arguments.DefaultArgumentsParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
@@ -11,6 +10,7 @@ import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 import com.smallworldfs.tasklist.task.Task;
+import com.smallworldfs.tasklist.task.TaskTargetingCommand;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import lombok.Getter;
@@ -34,7 +34,7 @@ public class RenameCommand extends TaskTargetingCommand<Arguments> {
             output.writeFormatted(INVALID_ID_MESSAGE, request.getNewId());
             return;
         }
-        runOnTask(output, request, request.getCurrentId());
+        runOnTask(request, request.getCurrentId());
     }
 
     private boolean isInvalid(String newId) {
