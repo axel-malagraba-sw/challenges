@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.smallworldfs.tasklist.AbstractCommandTest;
-import com.smallworldfs.tasklist.cli.command.exception.InvalidCommandArgumentsException;
 import com.smallworldfs.tasklist.project.Project;
 import com.smallworldfs.tasklist.task.Task;
 import com.smallworldfs.tasklist.task.TaskNotFoundException;
@@ -41,7 +40,7 @@ class DeleteCommandTest extends AbstractCommandTest<DeleteCommand> {
 
     @Test
     void throws_exception_when_no_arguments_are_provided() {
-        assertThrows(InvalidCommandArgumentsException.class, () -> run("delete"));
+        assertThrowsInvalidCommandArgumentException("delete");
     }
 
     @Test

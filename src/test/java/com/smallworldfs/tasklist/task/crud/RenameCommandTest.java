@@ -37,12 +37,12 @@ public class RenameCommandTest extends AbstractCommandTest<RenameCommand> {
 
     @Test
     void throws_exception_when_no_new_id_is_provided() {
-        assertThrows(InvalidCommandArgumentsException.class, () -> run("rename 1"));
+        assertThrowsInvalidCommandArgumentException("rename 1");
     }
 
     @Test
     void throws_exception_when_no_arguments_are_provided() {
-        assertThrows(InvalidCommandArgumentsException.class, () -> run("rename"));
+        assertThrowsInvalidCommandArgumentException("rename");
     }
 
     @Test

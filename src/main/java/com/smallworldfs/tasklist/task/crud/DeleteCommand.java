@@ -2,6 +2,7 @@ package com.smallworldfs.tasklist.task.crud;
 
 import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.command.arguments.ArgumentParser;
+import com.smallworldfs.tasklist.cli.command.arguments.SingleStringArgumentParser;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Output;
@@ -13,6 +14,8 @@ public class DeleteCommand implements Command<String> {
 
     @Getter
     private final CommandMatcher matcher = new StartsWithCommandMatcher("delete");
+    @Getter
+    private final ArgumentParser<String> argumentParser = new SingleStringArgumentParser(this::help);
     private final ProjectRegistry registry = ProjectRegistry.getInstance();
 
     @Override
@@ -24,11 +27,6 @@ public class DeleteCommand implements Command<String> {
 
     private boolean deleteTask(String id) {
         return registry.getAll().stream().anyMatch(project -> project.removeTask(id));
-    }
-
-    @Override
-    public ArgumentParser<String> getArgumentParser() {
-        return commandLine -> commandLine.getTrailingStringAtIndexForCommand(1, help());
     }
 
     @Override

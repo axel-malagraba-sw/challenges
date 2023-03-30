@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.smallworldfs.tasklist.AbstractCommandTest;
-import com.smallworldfs.tasklist.cli.command.exception.InvalidCommandArgumentsException;
 import com.smallworldfs.tasklist.project.ProjectNotFoundException;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import org.junit.jupiter.api.Test;
@@ -43,12 +42,12 @@ public class AddTaskCommandTest extends AbstractCommandTest<AddTaskCommand> {
 
     @Test
     void throws_exception_when_no_arguments_are_provided() {
-        assertThrows(InvalidCommandArgumentsException.class, () -> run("add task"));
+        assertThrowsInvalidCommandArgumentException("add task");
     }
 
     @Test
     void throws_exception_when_only_one_argument_is_provided() {
-        assertThrows(InvalidCommandArgumentsException.class, () -> run("add task test"));
+        assertThrowsInvalidCommandArgumentException("add task test");
     }
 
     @Test
