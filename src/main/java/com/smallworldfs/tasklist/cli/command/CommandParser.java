@@ -3,9 +3,10 @@ package com.smallworldfs.tasklist.cli.command;
 import com.smallworldfs.tasklist.cli.HelpCommand;
 import com.smallworldfs.tasklist.cli.UnknownCommand;
 import com.smallworldfs.tasklist.cli.io.Arguments;
+import com.smallworldfs.tasklist.project.crud.AddProjectCommand;
 import com.smallworldfs.tasklist.task.completion.CheckCommand;
 import com.smallworldfs.tasklist.task.completion.UncheckCommand;
-import com.smallworldfs.tasklist.task.crud.AddCommand;
+import com.smallworldfs.tasklist.task.crud.AddTaskCommand;
 import com.smallworldfs.tasklist.task.crud.DeleteCommand;
 import com.smallworldfs.tasklist.task.crud.RenameCommand;
 import com.smallworldfs.tasklist.task.crud.ShowCommand;
@@ -20,11 +21,12 @@ public class CommandParser {
     private static final Command UNKNOWN_COMMAND = new UnknownCommand();
 
     private final List<Command> commands = List.of(
+            new AddProjectCommand(),
             new DeadlineCommand(),
             new TodayCommand(),
             new CheckCommand(),
             new UncheckCommand(),
-            new AddCommand(),
+            new AddTaskCommand(),
             new ShowCommand(),
             new HelpCommand(),
             new RenameCommand(),
@@ -32,14 +34,13 @@ public class CommandParser {
 
     public ParsedCommand parse(String line) {
         String[] commandLine = line.trim().split(" ", 2);
-        String commandName = commandLine[0];
         Arguments arguments = new Arguments(getArgumentString(commandLine), line);
 
-        return parse(commandName, arguments);
+        return parse(arguments);
     }
 
-    private ParsedCommand parse(String commandName, Arguments arguments) {
-        return new ParsedCommand(findCommand(commandName).orElse(UNKNOWN_COMMAND), arguments);
+    private ParsedCommand parse(Arguments arguments) {
+        return new ParsedCommand(findCommand(arguments.getCommandLine()).orElse(UNKNOWN_COMMAND), arguments);
     }
 
     private Optional<Command> findCommand(String commandName) {

@@ -1,5 +1,6 @@
 package com.smallworldfs.tasklist.task;
 
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;

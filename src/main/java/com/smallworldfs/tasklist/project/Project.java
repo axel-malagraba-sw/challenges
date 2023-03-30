@@ -1,5 +1,6 @@
-package com.smallworldfs.tasklist.task;
+package com.smallworldfs.tasklist.project;
 
+import com.smallworldfs.tasklist.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

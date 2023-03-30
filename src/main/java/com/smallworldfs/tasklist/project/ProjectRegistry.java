@@ -1,4 +1,4 @@
-package com.smallworldfs.tasklist.task;
+package com.smallworldfs.tasklist.project;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

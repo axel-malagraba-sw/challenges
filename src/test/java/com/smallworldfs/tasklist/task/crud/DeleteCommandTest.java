@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.TestOutput;
-import com.smallworldfs.tasklist.task.Project;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.Project;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import com.smallworldfs.tasklist.task.Task;
 import java.util.Optional;

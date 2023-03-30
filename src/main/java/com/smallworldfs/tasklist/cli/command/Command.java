@@ -10,6 +10,6 @@ public interface Command {
     String name();
 
     default boolean matches(String command) {
-        return name().equals(command);
+        return command.startsWith(name());
     }
 }

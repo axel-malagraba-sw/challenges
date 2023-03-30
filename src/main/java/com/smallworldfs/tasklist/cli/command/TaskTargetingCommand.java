@@ -1,8 +1,8 @@
 package com.smallworldfs.tasklist.cli.command;
 
 import com.smallworldfs.tasklist.cli.io.Output;
-import com.smallworldfs.tasklist.task.Project;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.Project;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.Task;
 import java.util.Collection;
 import java.util.Optional;

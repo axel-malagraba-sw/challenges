@@ -3,12 +3,12 @@ package com.smallworldfs.tasklist.task.crud;
 import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
-import com.smallworldfs.tasklist.task.Project;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.Project;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.Task;
 import java.util.Optional;
 
-public class AddCommand implements Command {
+public class AddTaskCommand implements Command {
 
     private long lastId = 0;
 
@@ -16,18 +16,8 @@ public class AddCommand implements Command {
 
     @Override
     public void run(Arguments arguments, Output output) {
-        String[] subcommandRest = arguments.getArgumentString().split(" ", 2);
-        String subcommand = subcommandRest[0];
-        if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
-        } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1], output);
-        }
-    }
-
-    private void addProject(String name) {
-        registry.createProject(name);
+        String[] subcommandRest = arguments.getCommandLine().split(" ", 4);
+        addTask(subcommandRest[2], subcommandRest[3], output);
     }
 
     private void addTask(String projectName, String description, Output output) {
@@ -46,6 +36,6 @@ public class AddCommand implements Command {
 
     @Override
     public String name() {
-        return "add";
+        return "add task";
     }
 }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.TestOutput;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(ProjectRegistryExtension.class)
 public class AddCommandTest {
 
-    private final AddCommand command = new AddCommand();
+    private final AddTaskCommand command = new AddTaskCommand();
     private final TestOutput output = new TestOutput();
     private final ProjectRegistry registry = ProjectRegistry.getInstance();
 

@@ -3,7 +3,7 @@ package com.smallworldfs.tasklist.task.crud;
 import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 
 public class DeleteCommand extends TaskTargetingCommand {
 

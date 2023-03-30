@@ -1,6 +1,7 @@
 package com.smallworldfs.tasklist.task;
 
 import com.smallworldfs.tasklist.cli.io.Output;
+import com.smallworldfs.tasklist.project.Project;
 import java.util.List;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;

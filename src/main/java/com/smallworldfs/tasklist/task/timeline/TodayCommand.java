@@ -3,8 +3,8 @@ package com.smallworldfs.tasklist.task.timeline;
 import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
-import com.smallworldfs.tasklist.task.Project;
-import com.smallworldfs.tasklist.task.ProjectRegistry;
+import com.smallworldfs.tasklist.project.Project;
+import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.TaskWriter;
 import java.util.List;
 
