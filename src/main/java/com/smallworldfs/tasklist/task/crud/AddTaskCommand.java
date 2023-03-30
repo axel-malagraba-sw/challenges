@@ -7,10 +7,8 @@ import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
-import com.smallworldfs.tasklist.project.Project;
 import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.Task;
-import java.util.Optional;
 import lombok.Getter;
 
 public class AddTaskCommand implements Command<Arguments> {
@@ -26,17 +24,11 @@ public class AddTaskCommand implements Command<Arguments> {
     @Override
     public void run(Arguments arguments, Output output) {
         String[] subcommandRest = arguments.getCommandLine().split(" ", 4);
-        addTask(subcommandRest[2], subcommandRest[3], output);
+        addTask(subcommandRest[2], subcommandRest[3]);
     }
 
-    private void addTask(String projectName, String description, Output output) {
-        Optional<Project> storedProject = registry.find(projectName);
-
-        if (storedProject.isEmpty()) {
-            output.writeFormatted("Could not find a project with the name \"%s\".", projectName);
-            return;
-        }
-        storedProject.get().addTask(new Task(nextId(), description));
+    private void addTask(String projectName, String description) {
+        registry.find(projectName).addTask(new Task(nextId(), description));
     }
 
     private long nextId() {

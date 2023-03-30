@@ -11,7 +11,6 @@ import com.smallworldfs.tasklist.project.ProjectRegistry;
 import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import com.smallworldfs.tasklist.task.Task;
 import com.smallworldfs.tasklist.task.TaskNotFoundException;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -36,8 +35,7 @@ class DeleteCommandTest {
     void should_remove_task_from_project(Task task) {
         command.run(new Arguments(task.getId()), output);
 
-        Optional<Project> project = registry.find("test");
-        assertTrue(project.isPresent());
-        assertFalse(project.get().getTasks().contains(task));
+        Project project = registry.find("test");
+        assertFalse(project.getTasks().contains(task));
     }
 }

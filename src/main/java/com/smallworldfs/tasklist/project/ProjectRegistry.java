@@ -35,8 +35,8 @@ public class ProjectRegistry {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Project> find(String name) {
-        return Optional.ofNullable(projects.get(name));
+    public Project find(String name) {
+        return Optional.ofNullable(projects.get(name)).orElseThrow(() -> new ProjectNotFoundException(name));
     }
 
     public Project createProject(String name) {
