@@ -1,6 +1,7 @@
 package com.smallworldfs.tasklist;
 
 import com.smallworldfs.tasklist.cli.command.CommandParser;
+import com.smallworldfs.tasklist.cli.command.exception.CommandExecutionException;
 import com.smallworldfs.tasklist.cli.io.PrintWriterOutput;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,7 +41,11 @@ public final class TaskList implements Runnable {
     }
 
     private void runCommand(String line) {
-        commandParser.parse(line).run(new PrintWriterOutput(out));
+        try {
+            commandParser.parse(line).run(new PrintWriterOutput(out));
+        } catch (CommandExecutionException e) {
+            out.println(e.getMessage());
+        }
     }
 
     private String readInput() throws IOException {

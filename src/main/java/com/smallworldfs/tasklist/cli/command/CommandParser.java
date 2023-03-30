@@ -1,7 +1,7 @@
 package com.smallworldfs.tasklist.cli.command;
 
 import com.smallworldfs.tasklist.cli.HelpCommand;
-import com.smallworldfs.tasklist.cli.UnknownCommand;
+import com.smallworldfs.tasklist.cli.command.exception.CommandNotFoundException;
 import com.smallworldfs.tasklist.project.crud.AddProjectCommand;
 import com.smallworldfs.tasklist.task.completion.CheckCommand;
 import com.smallworldfs.tasklist.task.completion.UncheckCommand;
@@ -14,8 +14,6 @@ import com.smallworldfs.tasklist.task.timeline.TodayCommand;
 import java.util.List;
 
 public class CommandParser {
-
-    private static final Command<?> UNKNOWN_COMMAND = new UnknownCommand();
 
     private final List<Command<?>> commands = List.of(
             new AddProjectCommand(),
@@ -41,6 +39,6 @@ public class CommandParser {
         return (Command<T>) commands.stream()
                 .filter(command -> command.getMatcher().matches(commandLine))
                 .findFirst()
-                .orElse(UNKNOWN_COMMAND);
+                .orElseThrow(() -> new CommandNotFoundException(commandLine));
     }
 }

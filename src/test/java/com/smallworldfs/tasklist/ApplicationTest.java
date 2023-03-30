@@ -107,7 +107,7 @@ public final class ApplicationTest {
     @Timeout(value = 1)
     public void should_return_default_message_for_unknown_command() throws IOException {
         execute("dance for me");
-        readLines("I don't know what the command \"dance for me\" is.");
+        readLines("Unknown command \"dance for me\". Use help to get a list of available commands.");
     }
 
     @Test
