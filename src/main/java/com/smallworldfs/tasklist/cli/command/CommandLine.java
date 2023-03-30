@@ -12,4 +12,8 @@ public record CommandLine(String raw) {
         }
         return result;
     }
+
+    public <T> String getTrailingStringAtIndexForCommand(int index, Command<T> command) {
+        return splitIntoChunksForCommand(index + 1, command)[index];
+    }
 }

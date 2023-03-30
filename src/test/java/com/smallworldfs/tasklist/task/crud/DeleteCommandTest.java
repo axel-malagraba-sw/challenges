@@ -2,41 +2,50 @@ package com.smallworldfs.tasklist.task.crud;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.smallworldfs.tasklist.cli.command.CommandLine;
-import com.smallworldfs.tasklist.cli.io.Arguments;
-import com.smallworldfs.tasklist.cli.io.TestOutput;
+import com.smallworldfs.tasklist.AbstractCommandTest;
+import com.smallworldfs.tasklist.cli.command.exception.InvalidCommandArgumentsException;
 import com.smallworldfs.tasklist.project.Project;
-import com.smallworldfs.tasklist.project.ProjectRegistry;
-import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
 import com.smallworldfs.tasklist.task.Task;
 import com.smallworldfs.tasklist.task.TaskNotFoundException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(ProjectRegistryExtension.class)
-class DeleteCommandTest {
+class DeleteCommandTest extends AbstractCommandTest<DeleteCommand> {
 
-    private final DeleteCommand command = new DeleteCommand();
-    private final TestOutput output = new TestOutput();
-    private final ProjectRegistry registry = ProjectRegistry.getInstance();
+    public DeleteCommandTest() {
+        super(new DeleteCommand());
+    }
 
     @Test
-    void should_match_delete_command() {
-        assertTrue(command.getMatcher().matches(new CommandLine("delete 1")));
+    void matches_delete_with_id() {
+        assertMatches("delete 1");
+    }
+
+    @Test
+    void matches_delete_without_arguments() {
+        assertMatches("delete");
     }
 
     @Test
     void should_output_error_message_when_task_does_not_exist() {
-        assertThrows(TaskNotFoundException.class, () -> command.run(new Arguments("1"), output));
+        assertThrows(TaskNotFoundException.class, () -> run("delete 1"));
     }
 
     @Test
     void should_remove_task_from_project(Task task) {
-        command.run(new Arguments(task.getId()), output);
+        run("delete " + task.getId());
 
         Project project = registry.find("test");
         assertFalse(project.getTasks().contains(task));
+    }
+
+    @Test
+    void throws_exception_when_no_arguments_are_provided() {
+        assertThrows(InvalidCommandArgumentsException.class, () -> run("delete"));
+    }
+
+    @Test
+    void help_returns_example() {
+        assertHelpIsEqualTo("delete <task ID>");
     }
 }
