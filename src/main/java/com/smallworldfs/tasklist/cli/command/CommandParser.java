@@ -1,31 +1,12 @@
 package com.smallworldfs.tasklist.cli.command;
 
-import com.smallworldfs.tasklist.cli.HelpCommand;
 import com.smallworldfs.tasklist.cli.command.exception.CommandNotFoundException;
-import com.smallworldfs.tasklist.project.crud.AddProjectCommand;
-import com.smallworldfs.tasklist.task.completion.CheckCommand;
-import com.smallworldfs.tasklist.task.completion.UncheckCommand;
-import com.smallworldfs.tasklist.task.crud.AddTaskCommand;
-import com.smallworldfs.tasklist.task.crud.DeleteCommand;
-import com.smallworldfs.tasklist.task.crud.RenameCommand;
-import com.smallworldfs.tasklist.task.crud.ShowCommand;
-import com.smallworldfs.tasklist.task.timeline.DeadlineCommand;
-import com.smallworldfs.tasklist.task.timeline.TodayCommand;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class CommandParser {
 
-    private final List<Command<?>> commands = List.of(
-            new AddProjectCommand(),
-            new DeadlineCommand(),
-            new TodayCommand(),
-            new CheckCommand(),
-            new UncheckCommand(),
-            new AddTaskCommand(),
-            new ShowCommand(),
-            new HelpCommand(),
-            new RenameCommand(),
-            new DeleteCommand());
+    private final Commands commands;
 
     public <T> ParsedCommand<T> parse(String line) {
         Command<T> command = findCommand(line);

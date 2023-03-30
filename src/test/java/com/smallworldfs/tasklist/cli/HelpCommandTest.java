@@ -2,12 +2,13 @@ package com.smallworldfs.tasklist.cli;
 
 import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
 
+import com.smallworldfs.tasklist.cli.command.Commands;
 import com.smallworldfs.tasklist.cli.io.TestOutput;
 import org.junit.jupiter.api.Test;
 
 class HelpCommandTest {
 
-    private final HelpCommand command = new HelpCommand();
+    private final HelpCommand command = new HelpCommand(new Commands()::stream);
     private final TestOutput output = new TestOutput();
 
     @Test

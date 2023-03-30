@@ -21,4 +21,9 @@ public class UncheckCommand extends TaskTargetingCommand<Arguments> {
     public void run(Arguments arguments, Output output) {
         runOnTask(Task::uncheck, arguments.getArgumentString());
     }
+
+    @Override
+    public String help() {
+        return "uncheck <task ID>";
+    }
 }

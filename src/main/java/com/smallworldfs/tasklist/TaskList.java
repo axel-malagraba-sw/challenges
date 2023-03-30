@@ -1,6 +1,7 @@
 package com.smallworldfs.tasklist;
 
 import com.smallworldfs.tasklist.cli.command.CommandParser;
+import com.smallworldfs.tasklist.cli.command.Commands;
 import com.smallworldfs.tasklist.cli.command.exception.CommandExecutionException;
 import com.smallworldfs.tasklist.cli.io.PrintWriterOutput;
 import java.io.BufferedReader;
@@ -13,7 +14,8 @@ public final class TaskList implements Runnable {
 
     private static final String QUIT = "quit";
 
-    private final CommandParser commandParser = new CommandParser();
+    private final Commands commands = new Commands();
+    private final CommandParser commandParser = new CommandParser(commands);
     private final BufferedReader in;
     private final PrintWriter out;
 

@@ -27,6 +27,11 @@ public class DeadlineCommand extends TaskTargetingCommand<Arguments> {
         runOnTask(taskDeadline, taskDeadline.getTaskId());
     }
 
+    @Override
+    public String help() {
+        return "deadline <task ID> <date yyyy-mm-dd>";
+    }
+
     @Data
     private static class TaskDeadline implements Consumer<Task> {
 

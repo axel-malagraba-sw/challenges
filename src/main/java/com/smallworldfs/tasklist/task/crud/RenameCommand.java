@@ -41,6 +41,11 @@ public class RenameCommand extends TaskTargetingCommand<Arguments> {
         return !VALID_ID_PATTERN.matcher(newId).matches();
     }
 
+    @Override
+    public String help() {
+        return "rename <task ID> <new task ID>";
+    }
+
     @Getter
     private static class TaskRenameRequest implements Consumer<Task> {
 

@@ -21,4 +21,9 @@ public class CheckCommand extends TaskTargetingCommand<Arguments> {
     public void run(Arguments arguments, Output output) {
         runOnTask(Task::check, arguments.getArgumentString());
     }
+
+    @Override
+    public String help() {
+        return "check <task ID>";
+    }
 }

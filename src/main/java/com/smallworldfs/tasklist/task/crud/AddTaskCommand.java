@@ -42,4 +42,9 @@ public class AddTaskCommand implements Command<Arguments> {
     private long nextId() {
         return ++lastId;
     }
+
+    @Override
+    public String help() {
+        return "add task <project name> <task description>";
+    }
 }

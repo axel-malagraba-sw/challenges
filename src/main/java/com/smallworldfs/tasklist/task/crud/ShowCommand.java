@@ -18,4 +18,9 @@ public class ShowCommand extends NoArgumentsCommand {
     public void run(Output output) {
         new TaskWriter(output, registry.getAll()).write();
     }
+
+    @Override
+    public String help() {
+        return "show";
+    }
 }

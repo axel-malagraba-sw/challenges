@@ -1,28 +1,35 @@
 package com.smallworldfs.tasklist.cli;
 
+import com.smallworldfs.tasklist.cli.command.Command;
 import com.smallworldfs.tasklist.cli.command.NoArgumentsCommand;
 import com.smallworldfs.tasklist.cli.command.match.CommandMatcher;
 import com.smallworldfs.tasklist.cli.command.match.IsEqualToCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Output;
+import java.util.Objects;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class HelpCommand extends NoArgumentsCommand {
 
     @Getter
     private final CommandMatcher matcher = new IsEqualToCommandMatcher("help");
+    private final Supplier<Stream<Command<?>>> commandsSupplier;
 
     @Override
     public void run(Output output) {
         output.writeln("Commands:");
-        output.writeln("  show");
-        output.writeln("  add project <project name>");
-        output.writeln("  add task <project name> <task description>");
-        output.writeln("  check <task ID>");
-        output.writeln("  uncheck <task ID>");
-        output.writeln("  deadline <task ID> <date yyyy-mm-dd>");
-        output.writeln("  today");
-        output.writeln("  rename <task ID> <new task ID>");
-        output.writeln("  delete <task ID>");
+        writeCommands(output);
         output.newLine();
+    }
+
+    private void writeCommands(Output output) {
+        commandsSupplier.get()
+                .map(Command::help)
+                .filter(Objects::nonNull)
+                .map(help -> "  " + help)
+                .forEach(output::writeln);
     }
 }

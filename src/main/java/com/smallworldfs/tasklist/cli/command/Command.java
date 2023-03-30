@@ -11,4 +11,8 @@ public interface Command<T> {
     CommandMatcher getMatcher();
 
     ArgumentParser<T> getArgumentParser();
+
+    default String help() {
+        return null;
+    }
 }

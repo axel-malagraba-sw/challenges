@@ -30,4 +30,9 @@ public class TodayCommand extends NoArgumentsCommand {
     private void writeTasks(List<Project> projects, Output output) {
         new TaskWriter(output, projects).write(Project::getTasksDueToday);
     }
+
+    @Override
+    public String help() {
+        return "today";
+    }
 }

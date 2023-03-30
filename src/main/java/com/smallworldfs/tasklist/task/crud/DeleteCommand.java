@@ -31,4 +31,9 @@ public class DeleteCommand implements Command<Arguments> {
     private boolean deleteTask(String id) {
         return registry.getAll().stream().anyMatch(project -> project.removeTask(id));
     }
+
+    @Override
+    public String help() {
+        return "delete <task ID>";
+    }
 }

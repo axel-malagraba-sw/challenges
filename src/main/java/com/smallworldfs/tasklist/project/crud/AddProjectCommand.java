@@ -27,4 +27,9 @@ public class AddProjectCommand implements Command<Arguments> {
     private void addProject(String name) {
         registry.createProject(name);
     }
+
+    @Override
+    public String help() {
+        return "add project <project name>";
+    }
 }
