@@ -19,7 +19,7 @@ public record CommandLine(String raw) {
 
     private String getHelpMessage(String example) {
         if (example != null) {
-            return "Correct command syntax is \"" + example + "\"";
+            return " Correct command syntax is \"" + example + "\"";
         }
         return "";
     }

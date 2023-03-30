@@ -179,6 +179,13 @@ public final class ApplicationTest {
                 "");
     }
 
+    @Test
+    public void prints_validation_error_for_invalid_arguments() throws IOException {
+        execute("deadline");
+
+        readLines("Invalid command arguments. Correct command syntax is \"deadline <task ID> <date yyyy-mm-dd>\"");
+    }
+
     private void execute(String command) throws IOException {
         read(PROMPT);
         write(command);
