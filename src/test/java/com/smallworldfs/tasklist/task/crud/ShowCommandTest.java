@@ -2,20 +2,23 @@ package com.smallworldfs.tasklist.task.crud;
 
 import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
 
-import com.smallworldfs.tasklist.cli.io.TestOutput;
-import com.smallworldfs.tasklist.task.ProjectRegistryExtension;
+import com.smallworldfs.tasklist.AbstractCommandTest;
 import com.smallworldfs.tasklist.task.Task;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@ExtendWith(ProjectRegistryExtension.class)
-public class ShowCommandTest {
+public class ShowCommandTest extends AbstractCommandTest<ShowCommand> {
 
-    private final ShowCommand command = new ShowCommand();
-    private final TestOutput output = new TestOutput();
+    public ShowCommandTest() {
+        super(new ShowCommand());
+    }
 
     @Test
-    void should_not_output_anything_when_no_tasks() {
+    void matches_command() {
+        assertMatches("show");
+    }
+
+    @Test
+    void does_nothing_when_there_are_no_tasks() {
         command.run(output);
 
         assertThat(output).isEmpty();
@@ -47,5 +50,10 @@ public class ShowCommandTest {
         command.run(output);
 
         assertThat(output).contains("[ ]");
+    }
+
+    @Test
+    void help_returns_example() {
+        assertHelpIsEqualTo("show");
     }
 }

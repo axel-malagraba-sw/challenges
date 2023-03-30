@@ -92,4 +92,9 @@ public class RenameCommandTest extends AbstractCommandTest<RenameCommand> {
 
         assertEquals("AwesomeLeak", task.getId());
     }
+
+    @Test
+    void help_returns_example() {
+        assertHelpIsEqualTo("rename <task ID> <new task ID>");
+    }
 }
