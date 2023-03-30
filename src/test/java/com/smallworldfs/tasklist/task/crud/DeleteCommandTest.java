@@ -1,7 +1,6 @@
 package com.smallworldfs.tasklist.task.crud;
 
 import static com.smallworldfs.tasklist.cli.io.TestOutput.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,8 +22,8 @@ class DeleteCommandTest {
     private final ProjectRegistry registry = ProjectRegistry.getInstance();
 
     @Test
-    void should_return_delete_as_name() {
-        assertEquals("delete", command.name());
+    void should_match_delete_command() {
+        assertTrue(command.getMatcher().matches("delete 1"));
     }
 
     @Test

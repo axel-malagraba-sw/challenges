@@ -43,8 +43,8 @@ public class CommandParser {
         return new ParsedCommand(findCommand(arguments.getCommandLine()).orElse(UNKNOWN_COMMAND), arguments);
     }
 
-    private Optional<Command> findCommand(String commandName) {
-        return commands.stream().filter(command -> command.matches(commandName)).findFirst();
+    private Optional<Command> findCommand(String commandLine) {
+        return commands.stream().filter(command -> command.getMatcher().matches(commandLine)).findFirst();
     }
 
     private String getArgumentString(String[] commandLine) {

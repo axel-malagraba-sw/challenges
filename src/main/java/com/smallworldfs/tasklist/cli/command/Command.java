@@ -7,9 +7,5 @@ public interface Command {
 
     void run(Arguments arguments, Output output);
 
-    String name();
-
-    default boolean matches(String command) {
-        return command.startsWith(name());
-    }
+    CommandMatcher getMatcher();
 }

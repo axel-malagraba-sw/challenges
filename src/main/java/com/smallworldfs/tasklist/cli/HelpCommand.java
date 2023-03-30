@@ -1,10 +1,16 @@
 package com.smallworldfs.tasklist.cli;
 
 import com.smallworldfs.tasklist.cli.command.Command;
+import com.smallworldfs.tasklist.cli.command.CommandMatcher;
+import com.smallworldfs.tasklist.cli.command.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
+import lombok.Getter;
 
 public class HelpCommand implements Command {
+
+    @Getter
+    private final CommandMatcher matcher = new StartsWithCommandMatcher("help");
 
     @Override
     public void run(Arguments arguments, Output output) {
@@ -19,10 +25,5 @@ public class HelpCommand implements Command {
         output.writeln("  rename <task ID> <new task ID>");
         output.writeln("  delete <task ID>");
         output.newLine();
-    }
-
-    @Override
-    public String name() {
-        return "help";
     }
 }

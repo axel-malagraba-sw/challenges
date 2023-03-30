@@ -3,6 +3,8 @@ package com.smallworldfs.tasklist.task.crud;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
 
+import com.smallworldfs.tasklist.cli.command.CommandMatcher;
+import com.smallworldfs.tasklist.cli.command.StartsWithCommandMatcher;
 import com.smallworldfs.tasklist.cli.command.TaskTargetingCommand;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
@@ -17,6 +19,9 @@ public class RenameCommand extends TaskTargetingCommand {
     private static final String INVALID_ID_MESSAGE =
             "New id '%s' is not valid. It must be an alphanumeric string containing at least one character.";
 
+    @Getter
+    private final CommandMatcher matcher = new StartsWithCommandMatcher("rename");
+
     @Override
     public void run(Arguments arguments, Output output) {
         TaskRenameRequest request = new TaskRenameRequest(arguments);
@@ -30,11 +35,6 @@ public class RenameCommand extends TaskTargetingCommand {
 
     private boolean isInvalid(String newId) {
         return !VALID_ID_PATTERN.matcher(newId).matches();
-    }
-
-    @Override
-    public String name() {
-        return "rename";
     }
 
     @Getter

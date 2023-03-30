@@ -1,6 +1,7 @@
 package com.smallworldfs.tasklist.cli;
 
 import com.smallworldfs.tasklist.cli.command.Command;
+import com.smallworldfs.tasklist.cli.command.CommandMatcher;
 import com.smallworldfs.tasklist.cli.io.Arguments;
 import com.smallworldfs.tasklist.cli.io.Output;
 
@@ -12,7 +13,7 @@ public class UnknownCommand implements Command {
     }
 
     @Override
-    public String name() {
-        return "";
+    public CommandMatcher getMatcher() {
+        return line -> false;
     }
 }
