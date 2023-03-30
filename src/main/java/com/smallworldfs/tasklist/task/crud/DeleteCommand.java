@@ -28,7 +28,7 @@ public class DeleteCommand implements Command<String> {
 
     @Override
     public ArgumentParser<String> getArgumentParser() {
-        return commandLine -> commandLine.getTrailingStringAtIndexForCommand(1, this);
+        return commandLine -> commandLine.getTrailingStringAtIndexForCommand(1, help());
     }
 
     @Override

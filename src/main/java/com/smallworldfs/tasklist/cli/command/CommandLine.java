@@ -4,16 +4,23 @@ import com.smallworldfs.tasklist.cli.command.exception.InvalidCommandArgumentsEx
 
 public record CommandLine(String raw) {
 
-    public <T> String[] splitIntoChunksForCommand(int chunks, Command<T> command) {
+    public String[] splitIntoChunks(int chunks, String example) {
         String[] result = raw.split(" ", chunks);
 
         if (result.length < chunks) {
-            throw new InvalidCommandArgumentsException(command);
+            throw new InvalidCommandArgumentsException("Invalid command arguments." + getHelpMessage(example));
         }
         return result;
     }
 
-    public <T> String getTrailingStringAtIndexForCommand(int index, Command<T> command) {
-        return splitIntoChunksForCommand(index + 1, command)[index];
+    public String getTrailingStringAtIndexForCommand(int index, String example) {
+        return splitIntoChunks(index + 1, example)[index];
+    }
+
+    private String getHelpMessage(String example) {
+        if (example != null) {
+            return "Correct command syntax is \"" + example + "\"";
+        }
+        return "";
     }
 }

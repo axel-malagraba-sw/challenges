@@ -27,7 +27,7 @@ public class AddTaskCommand implements Command<NewTask> {
     @Override
     public ArgumentParser<NewTask> getArgumentParser() {
         return commandLine -> {
-            String[] chunks = commandLine.splitIntoChunksForCommand(4, this);
+            String[] chunks = commandLine.splitIntoChunks(4, help());
 
             return new NewTask(chunks[2], chunks[3]);
         };
