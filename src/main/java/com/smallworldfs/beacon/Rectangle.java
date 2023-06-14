@@ -5,45 +5,48 @@ import java.util.stream.Stream;
 public record Rectangle(Point bottomLeft, Point topRight) {
 
     public boolean isDivisible() {
-        return topRight.x() - bottomLeft.x() > 1
-                || topRight.y() - bottomLeft.y() > 1;
+        return topRight.x() - bottomLeft.x() > 1 || topRight.y() - bottomLeft.y() > 1;
     }
 
     public Stream<Rectangle> divide() {
         if (!isDivisible()) {
             return Stream.empty();
         }
-        Point center = calculateCenter();
+        Point center = estimateCenter();
 
         return Stream.of(
                 new Rectangle(bottomLeft, center),
                 new Rectangle(center, topRight),
                 new Rectangle(new Point(bottomLeft.x(), center.y()), new Point(center.x(), topRight.y())),
                 new Rectangle(new Point(center.x(), bottomLeft.y()), new Point(topRight.x(), center.y())))
-                .filter(Rectangle::isRectangle);
+                .filter(Rectangle::isValid);
     }
 
-    private Point calculateCenter() {
+    private Point estimateCenter() {
         int height = topRight.y() - bottomLeft.y();
         int length = topRight.x() - bottomLeft.x();
 
         return new Point(bottomLeft.x() + split(length), bottomLeft.y() + split(height));
     }
 
-    private boolean isRectangle() {
-        return bottomLeft.x() != topRight.x() && bottomLeft.y() != topRight.y();
-    }
-
     private int split(int value) {
         return value > 1 ? (value / 2) : 0;
     }
 
+    private boolean isValid() {
+        return bottomLeft.x() != topRight.x() && bottomLeft.y() != topRight.y();
+    }
+
     public Stream<Point> vertices() {
-        return Stream.of(
-                bottomLeft,
-                topRight,
-                new Point(topRight.x(), bottomLeft.y()),
-                new Point(bottomLeft.x(), topRight.y()));
+        return Stream.of(bottomLeft(), topRight(), bottomRight(), topLeft());
+    }
+
+    public Point topLeft() {
+        return new Point(bottomLeft.x(), topRight.y());
+    }
+
+    public Point bottomRight() {
+        return new Point(topRight.x(), bottomLeft.y());
     }
 
     public int minX() {
