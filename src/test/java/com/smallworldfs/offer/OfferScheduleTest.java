@@ -30,6 +30,18 @@ class OfferScheduleTest {
     }
 
     @Test
+    void returns_offers_with_no_overlap() {
+        List<Offer> offers = List.of(
+                offer(1, 0, "2023-06-05T15:00:00Z", "2023-06-25T15:00:00Z", 10),
+                offer(2, 0, "2023-06-29T15:00:00Z", "2023-07-05T15:00:00Z", 11));
+
+        assertThat(schedule(offers))
+                .containsExactly(
+                        scheduled(1, "2023-06-05T15:00:00Z", "2023-06-25T15:00:00Z", 10),
+                        scheduled(2, "2023-06-29T15:00:00Z", "2023-07-05T15:00:00Z", 11));
+    }
+
+    @Test
     void selects_offer_with_higher_priority_when_overlapping() {
         List<Offer> offers = List.of(
                 offer(1, 0, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10),
