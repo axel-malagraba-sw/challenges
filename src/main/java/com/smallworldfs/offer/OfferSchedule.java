@@ -58,7 +58,7 @@ public class OfferSchedule {
     private void processOverlappingOffer(Offer offer) {
         if (isApplicableAfterLastOffer(offer)) {
             requeueOfferIfActiveAfter(lastOffer, offer.getEndDate());
-            applyOfferOverlapMargin(offer);
+            adjustLastOfferEndDate(offer);
             schedule(offer);
             return;
         }
@@ -75,7 +75,7 @@ public class OfferSchedule {
         }
     }
 
-    private void applyOfferOverlapMargin(Offer offer) {
-        lastScheduledOffer.setEndDate(offer.getStartDate().minus(OFFER_OVERLAP_MARGIN));
+    private void adjustLastOfferEndDate(Offer nextOffer) {
+        lastScheduledOffer.setEndDate(nextOffer.getStartDate().minus(OFFER_OVERLAP_MARGIN));
     }
 }
