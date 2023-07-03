@@ -76,6 +76,6 @@ public class OfferSchedule {
     }
 
     private void applyOfferOverlapMargin(Offer offer) {
-        lastScheduledOffer.setEndDate(offer.getStartDate().minusSeconds(OFFER_OVERLAP_MARGIN.toSeconds()));
+        lastScheduledOffer.setEndDate(offer.getStartDate().minus(OFFER_OVERLAP_MARGIN));
     }
 }

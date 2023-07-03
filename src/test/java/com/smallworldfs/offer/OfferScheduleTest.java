@@ -24,9 +24,8 @@ class OfferScheduleTest {
         List<Offer> offers = List.of(
                 offer(1, 0, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(1, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(1, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10));
     }
 
     @Test
@@ -35,10 +34,9 @@ class OfferScheduleTest {
                 offer(1, 0, "2023-06-05T15:00:00Z", "2023-06-25T15:00:00Z", 10),
                 offer(2, 0, "2023-06-29T15:00:00Z", "2023-07-05T15:00:00Z", 11));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(1, "2023-06-05T15:00:00Z", "2023-06-25T15:00:00Z", 10),
-                        scheduled(2, "2023-06-29T15:00:00Z", "2023-07-05T15:00:00Z", 11));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(1, "2023-06-05T15:00:00Z", "2023-06-25T15:00:00Z", 10),
+                scheduled(2, "2023-06-29T15:00:00Z", "2023-07-05T15:00:00Z", 11));
     }
 
     @Test
@@ -47,10 +45,9 @@ class OfferScheduleTest {
                 offer(1, 0, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10),
                 offer(2, 1, "2023-07-03T16:00:00Z", "2023-07-06T15:00:00Z", 9));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(1, "2023-06-05T15:00:00Z", "2023-07-03T15:59:59Z", 10),
-                        scheduled(2, "2023-07-03T16:00:00Z", "2023-07-06T15:00:00Z", 9));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(1, "2023-06-05T15:00:00Z", "2023-07-03T15:59:59Z", 10),
+                scheduled(2, "2023-07-03T16:00:00Z", "2023-07-06T15:00:00Z", 9));
     }
 
     @Test
@@ -59,11 +56,10 @@ class OfferScheduleTest {
                 offer(1, 0, "2023-06-05T15:00:00Z", "2023-07-05T15:00:00Z", 10),
                 offer(2, 1, "2023-06-25T16:00:00Z", "2023-07-01T15:00:00Z", 9));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(1, "2023-06-05T15:00:00Z", "2023-06-25T15:59:59Z", 10),
-                        scheduled(2, "2023-06-25T16:00:00Z", "2023-07-01T14:59:59Z", 9),
-                        scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(1, "2023-06-05T15:00:00Z", "2023-06-25T15:59:59Z", 10),
+                scheduled(2, "2023-06-25T16:00:00Z", "2023-07-01T14:59:59Z", 9),
+                scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
     }
 
     @Test
@@ -73,12 +69,11 @@ class OfferScheduleTest {
                 offer(2, 2, "2023-06-25T16:00:00Z", "2023-07-01T15:00:00Z", 9),
                 offer(3, 1, "2023-06-15T16:00:00Z", "2023-07-01T15:00:00Z", 11));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(1, "2023-06-05T15:00:00Z", "2023-06-15T15:59:59Z", 10),
-                        scheduled(3, "2023-06-15T16:00:00Z", "2023-06-25T15:59:59Z", 11),
-                        scheduled(2, "2023-06-25T16:00:00Z", "2023-07-01T14:59:59Z", 9),
-                        scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(1, "2023-06-05T15:00:00Z", "2023-06-15T15:59:59Z", 10),
+                scheduled(3, "2023-06-15T16:00:00Z", "2023-06-25T15:59:59Z", 11),
+                scheduled(2, "2023-06-25T16:00:00Z", "2023-07-01T14:59:59Z", 9),
+                scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
     }
 
     @Test
@@ -88,12 +83,11 @@ class OfferScheduleTest {
                 offer(2, 0, "2023-06-01T16:00:00Z", "2023-07-01T15:00:00Z", 9),
                 offer(3, 1, "2023-06-15T16:00:00Z", "2023-05-29T15:00:00Z", 11));
 
-        assertThat(schedule(offers))
-                .containsExactly(
-                        scheduled(2, "2023-06-01T16:00:00Z", "2023-06-15T15:59:59Z", 9),
-                        scheduled(3, "2023-06-15T16:00:00Z", "2023-05-29T14:59:59Z", 11),
-                        scheduled(2, "2023-05-29T15:00:00Z", "2023-07-01T14:59:59Z", 9),
-                        scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
+        assertThat(schedule(offers)).containsExactly(
+                scheduled(2, "2023-06-01T16:00:00Z", "2023-06-15T15:59:59Z", 9),
+                scheduled(3, "2023-06-15T16:00:00Z", "2023-05-29T14:59:59Z", 11),
+                scheduled(2, "2023-05-29T15:00:00Z", "2023-07-01T14:59:59Z", 9),
+                scheduled(1, "2023-07-01T15:00:00Z", "2023-07-05T15:00:00Z", 10));
     }
 
     private Offer offer(int id, int priority, String startDate, String endDate, int amount) {
