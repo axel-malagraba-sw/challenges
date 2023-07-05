@@ -16,12 +16,13 @@ public class Journey {
     private Car car;
     private boolean completed;
 
-    public boolean isPendingAssignment() {
-        return car == null;
+    public boolean hasAssignedCar() {
+        return car != null;
     }
 
     public void complete() {
         completed = true;
+        car.increaseCapacity(passengers);
     }
 
     public void assign(Car car) {

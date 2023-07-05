@@ -44,6 +44,7 @@ public class JourneyHandler {
     private void startWorkerThread() {
         worker = new Thread(this::assignJourneys, "Journey-Handler");
         worker.start();
+        System.out.println("Journey handler worker started");
     }
 
     public void enqueue(Journey journey) {
@@ -58,7 +59,6 @@ public class JourneyHandler {
 
     public void dropOff(Journey journey) {
         journey.complete();
-        journey.getCar().increaseCapacity(journey.getPassengers());
         logDropOff(journey);
         signalActivity();
     }
@@ -67,12 +67,15 @@ public class JourneyHandler {
         System.out.println("Dropped off " + journey.getPassengers() + " passengers");
     }
 
-    @SneakyThrows
     private void assignJourneys() {
-        while (true) {
-            pollQueue();
-            assignAwaitingJourneys();
-            awaitActivity();
+        try {
+            while (true) {
+                pollQueue();
+                assignAwaitingJourneys();
+                awaitActivity();
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Journey handler worker stopped");
         }
     }
 
