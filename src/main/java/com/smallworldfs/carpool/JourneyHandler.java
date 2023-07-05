@@ -1,6 +1,7 @@
 package com.smallworldfs.carpool;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
@@ -71,7 +72,7 @@ public class JourneyHandler {
         try {
             while (true) {
                 pollQueue();
-                assignAwaitingJourneys();
+                assignAwaitingJourneysInArrivalOrder();
                 awaitActivity();
             }
         } catch (InterruptedException e) {
@@ -94,8 +95,21 @@ public class JourneyHandler {
         }
     }
 
-    private void assignAwaitingJourneys() {
-        awaitingJourneys.removeIf(this::assignJourney);
+    private void assignAwaitingJourneysInArrivalOrder() {
+        int maxAvailableCapacity = Integer.MAX_VALUE;
+
+        for (Iterator<Journey> journeys = awaitingJourneys.iterator(); journeys.hasNext();) {
+            Journey journey = journeys.next();
+
+            if (journey.getPassengers() > maxAvailableCapacity) {
+                continue;
+            }
+            if (assignJourney(journey)) {
+                journeys.remove();
+                continue;
+            }
+            maxAvailableCapacity = journey.getPassengers() - 1;
+        }
     }
 
     private boolean assignJourney(Journey journey) {
