@@ -101,15 +101,19 @@ public class JourneyHandler {
         for (Iterator<Journey> journeys = awaitingJourneys.iterator(); journeys.hasNext();) {
             Journey journey = journeys.next();
 
-            if (journey.getPassengers() > maxAvailableCapacity) {
-                continue;
-            }
-            if (assignJourney(journey)) {
+            if (assignJourneyInArrivalOrder(journey, maxAvailableCapacity)) {
                 journeys.remove();
                 continue;
             }
             maxAvailableCapacity = journey.getPassengers() - 1;
         }
+    }
+
+    private boolean assignJourneyInArrivalOrder(Journey journey, int maxAvailableCapacity) {
+        if (journey.getPassengers() > maxAvailableCapacity) {
+            return false;
+        }
+        return assignJourney(journey);
     }
 
     private boolean assignJourney(Journey journey) {
