@@ -29,10 +29,8 @@ public class OfferSchedule {
     }
 
     public List<ScheduledOffer> toList() {
-        Offer offer;
-
-        while ((offer = queue.poll()) != null) {
-            processOffer(offer);
+        while (!queue.isEmpty()) {
+            processOffer(queue.poll());
         }
         return scheduledOffers;
     }
